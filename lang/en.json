@@ -1,0 +1,9 @@
+{
+    "staff": {
+        "username": "Username",
+        "password": "Password"
+    },
+    "login": {
+        "button": "Login"
+    }
+}
