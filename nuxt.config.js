@@ -58,6 +58,31 @@ export default {
   build: {
   },
 
+  auth: {
+    redirect: {
+      login: '/',
+      logout: '/',
+      callback: '/',
+      home: '/dashboard'
+    },
+    strategies: {
+      local: {
+        scheme: 'local',
+        token: {
+          property: 'token'
+        },
+        user: {
+          property: 'user'
+        },
+        endpoints: {
+          login: { url: '/api/auth/login', method: 'post' },
+          logout: { url: '/api/auth/logout', method: 'post' },
+          user: { url: '/api/auth/user', method: 'get' }
+        }
+      }
+    }
+  },
+
   i18n: {
     locales: [
       {

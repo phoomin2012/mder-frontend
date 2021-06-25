@@ -26,9 +26,12 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 import errorHandle from '~/components/error-handle.vue'
+
 export default {
   components: { errorHandle },
+  layout: 'guest',
   data () {
     return {
       username: '',
@@ -42,21 +45,22 @@ export default {
     async submitLogin () {
       try {
         this.loading = true
-        const { data } = await this.$axios.post('/api/auth/login', {
-          username: this.username,
-          password: this.password
+        await this.$auth.loginWith('local', {
+          data: {
+            username: this.username,
+            password: this.password
+          }
         })
-        if (data.success) {
-          this.$redirect('/dashboard')
-        }
+        this.$router.replace('/dashboard')
       } catch (e) {
         if (e.response) {
           if (e.response.data.error) {
             if (e.response.data.error.form) {
-              this.$set(this, 'errors', e.response.data.error.form)
+              return this.$set(this, 'errors', e.response.data.error.form)
             }
           }
         }
+        Swal.fire(this.$t('error.popup.request'))
       }
       this.loading = false
     }

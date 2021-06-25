@@ -17,6 +17,13 @@
                     "invalid": "Incorrect password or account isn't exist."
                 }
             }
+        },
+        "popup": {
+            "request": {
+                "title": "Can't complete request",
+                "text": "Please try again later.",
+                "icon": "error"
+            }
         }
     }
 }
