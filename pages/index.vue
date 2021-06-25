@@ -32,6 +32,8 @@ import errorHandle from '~/components/error-handle.vue'
 export default {
   components: { errorHandle },
   layout: 'guest',
+  auth: 'guest',
+
   data () {
     return {
       username: '',
@@ -51,7 +53,6 @@ export default {
             password: this.password
           }
         })
-        this.$router.replace('/dashboard')
       } catch (e) {
         if (e.response) {
           if (e.response.data.error) {
