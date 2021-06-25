@@ -5,5 +5,18 @@
     },
     "login": {
         "button": "Login"
+    },
+    "error": {
+        "form": {
+            "login": {
+                "username": {
+                    "empty": "Please enter useranme."
+                },
+                "password": {
+                    "empty": "Please enter password.",
+                    "invalid": "Incorrect password or account isn't exist."
+                }
+            }
+        }
     }
 }
