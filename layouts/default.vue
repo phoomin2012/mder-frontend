@@ -15,13 +15,62 @@ export default {
 </script>
 
 <style lang="scss">
-  .app-wrapper {
-    display: flex;
-    & > div {
-      &.sidebar {
-        min-width: 130px;
-        max-width: 270px;
+html {
+  height: 100%;
+  body {
+    height: 100%;
+    div#__nuxt {
+      height: 100%;
+      div#__layout {
+        height: 100%;
       }
     }
   }
+}
+
+.app-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  & > div {
+    // Sidebar
+    &.sidebar {
+      min-width: 270px;
+      background: #4F4F4F;
+      padding: 2.5rem;
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+          a {
+            color: #fff;
+            display: block;
+            text-decoration: none;
+
+            &:hover {
+              color: #d3d3d3
+            }
+            svg {
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+
+    // Content
+    &:last-child {
+      flex-grow: 1;
+      background: #e5e5e5;
+      overflow: auto;
+      padding: 2.5rem;
+    }
+  }
+}
 </style>
