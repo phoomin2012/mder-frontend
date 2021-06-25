@@ -1,10 +1,9 @@
 <template>
-  <div class="container">
-    Dashboard
-  </div>
+  <div />
 </template>
 
 <script>
 export default {
+
 }
 </script>
