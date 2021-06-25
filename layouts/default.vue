@@ -36,20 +36,29 @@ html {
     // Sidebar
     &.sidebar {
       min-width: 270px;
-      background: #ffaa11;
+      background: #4F4F4F;
       padding: 2.5rem;
 
       ul {
         list-style-type: none;
         padding: 0;
+        margin: 0;
 
         li {
             padding-top: 10px;
             padding-bottom: 10px;
 
           a {
+            color: #fff;
             display: block;
             text-decoration: none;
+
+            &:hover {
+              color: #d3d3d3
+            }
+            svg {
+              margin-right: 10px;
+            }
           }
         }
       }
@@ -58,7 +67,7 @@ html {
     // Content
     &:last-child {
       flex-grow: 1;
-      background: #5a8921;
+      background: #e5e5e5;
       overflow: auto;
       padding: 2.5rem;
     }
