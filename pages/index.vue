@@ -43,6 +43,12 @@ export default {
     }
   },
 
+  created () {
+    if (this.$auth.loggedIn) {
+      this.$router.replace('/dashboard')
+    }
+  },
+
   methods: {
     async submitLogin () {
       try {
