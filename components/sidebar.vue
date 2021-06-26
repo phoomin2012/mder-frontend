@@ -9,7 +9,7 @@
       </li>
 
       <li>
-        <nuxt-link to="/patient/add">
+        <nuxt-link to="/patient/new">
           <fa-icon icon="user-injured" size="lg" />
           Add patient
         </nuxt-link>
