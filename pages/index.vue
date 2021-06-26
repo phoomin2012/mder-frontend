@@ -27,6 +27,7 @@
 
 <script>
 import Swal from 'sweetalert2'
+import { connectSocket } from '../service/socket'
 import errorHandle from '~/components/error-handle.vue'
 
 export default {
@@ -45,6 +46,7 @@ export default {
 
   created () {
     if (this.$auth.loggedIn) {
+      connectSocket()
       this.$router.replace('/dashboard')
     }
   },
@@ -59,6 +61,7 @@ export default {
             password: this.password
           }
         })
+        connectSocket()
       } catch (e) {
         if (e.response) {
           if (e.response.data.error) {
