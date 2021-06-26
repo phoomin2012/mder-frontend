@@ -1,10 +1,42 @@
 {
     "staff": {
         "username": "ชื่อบัญชีผู้ใช้",
-        "password": "รหัสผ่าน"
+        "password": "รหัสผ่าน",
+        "name": "ชื่อ",
+        "lastName": "นามสกุล",
+        "role": "ตำแหน่ง",
+        "roles": {
+            "physician": "หมอ",
+            "nurse": "พยาบาล"
+        },
+        "new": "เพิ่มบัญชี Staff",
+        "edit": "แก้ไข",
+        "remove": "ลบ"
     },
     "login": {
         "button": "เข้าสู่ระบบ"
+    },
+    "sidebar": {
+        "dashboard": "Dashboard",
+        "add-patient": "เพิ่มข้อมูลผู้ป่วย",
+        "staff": "จัดการ Staff",
+        "history": "รายงาน",
+        "logout": "ออกจากระบบ"
+    },
+    "table": {
+        "actions": "ตัวเลือก"
+    },
+    "popup": {
+        "close": "ปิด",
+        "confirm": "ยืนยัน",
+        "cancel": "ยกเลิก",
+        "deny": "ปฏิเสธ",
+        "staff": {
+            "remove": {
+                "title": "ลบบัญชีของ {0} {1}?",
+                "text": "เมื่อลบแล้วจะไม่สามารถกู้คืนข้อมูลได้"
+            }
+        }
     },
     "error": {
         "form": {

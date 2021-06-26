@@ -1,10 +1,42 @@
 {
     "staff": {
         "username": "Username",
-        "password": "Password"
+        "password": "Password",
+        "name": "Name",
+        "lastName": "Lastname",
+        "role": "Role",
+        "roles": {
+            "physician": "Physician",
+            "nurse": "Nurse"
+        },
+        "new": "New staff",
+        "edit": "Edit",
+        "remove": "Remove"
     },
     "login": {
         "button": "Login"
+    },
+    "sidebar": {
+        "dashboard": "Dashboard",
+        "add-patient": "Add patient",
+        "staff": "Staff Management",
+        "history": "History",
+        "logout": "Logout"
+    },
+    "table": {
+        "actions": "Actions"
+    },
+    "popup": {
+        "close": "Close",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "deny": "Deny",
+        "staff": {
+            "remove": {
+                "title": "Remove account of {0} {1}?",
+                "text": "This action can't undo"
+            }
+        }
     },
     "error": {
         "form": {
