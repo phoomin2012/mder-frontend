@@ -33,6 +33,16 @@
     <div>
       <ul>
         <li>
+          <b-button-group class="w-100">
+            <b-button :variant="$i18n.locale === 'th' ? 'primary' : 'light'" :disabled="$i18n.locale === 'th'" @click.prevent.stop="$i18n.setLocale('th')">
+              ไทย
+            </b-button>
+            <b-button :variant="$i18n.locale === 'en' ? 'primary' : 'light'" :disabled="$i18n.locale === 'en'" @click.prevent.stop="$i18n.setLocale('en')">
+              English
+            </b-button>
+          </b-button-group>
+        </li>
+        <li>
           <a href="#logout" @click.prevent="logout">
             <fa-icon icon="sign-out-alt" size="lg" />
             {{ $t('sidebar.logout') }}
