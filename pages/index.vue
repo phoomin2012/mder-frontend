@@ -46,7 +46,6 @@ export default {
 
   created () {
     if (this.$auth.loggedIn) {
-      connectSocket()
       this.$router.replace('/dashboard')
     }
   },
@@ -61,7 +60,7 @@ export default {
             password: this.password
           }
         })
-        connectSocket()
+        connectSocket(this.$auth)
       } catch (e) {
         if (e.response) {
           if (e.response.data.error) {

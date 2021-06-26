@@ -24,7 +24,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/fontawesome.js'
+    '@/plugins/fontawesome.js',
+    '@/service/socket.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,6 +46,10 @@ export default {
     '@nuxtjs/auth-next',
     'nuxt-i18n'
   ],
+
+  router: {
+    middleware: ['connectSocket']
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
