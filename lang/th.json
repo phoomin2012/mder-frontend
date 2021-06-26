@@ -6,6 +6,13 @@
     "login": {
         "button": "เข้าสู่ระบบ"
     },
+    "sidebar": {
+        "dashboard": "Dashboard",
+        "add-patient": "เพิ่มข้อมูลผู้ป่วย",
+        "staff": "จัดการ Staff",
+        "history": "รายงาน",
+        "logout": "ออกจากระบบ"
+    },
     "error": {
         "form": {
             "login": {

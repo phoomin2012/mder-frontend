@@ -6,6 +6,13 @@
     "login": {
         "button": "Login"
     },
+    "sidebar": {
+        "dashboard": "Dashboard",
+        "add-patient": "Add patient",
+        "staff": "Staff Management",
+        "history": "History",
+        "logout": "Logout"
+    },
     "error": {
         "form": {
             "login": {
