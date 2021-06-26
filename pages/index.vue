@@ -27,6 +27,7 @@
 
 <script>
 import Swal from 'sweetalert2'
+import { connectSocket } from '../service/socket'
 import errorHandle from '~/components/error-handle.vue'
 
 export default {
@@ -59,6 +60,7 @@ export default {
             password: this.password
           }
         })
+        connectSocket(this.$auth)
       } catch (e) {
         if (e.response) {
           if (e.response.data.error) {
