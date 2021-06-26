@@ -44,10 +44,13 @@
 </template>
 
 <script>
+import { disconnectSocket } from '~/service/socket'
+
 export default {
   methods: {
     async logout () {
       await this.$auth.logout()
+      disconnectSocket()
     }
   }
 }
