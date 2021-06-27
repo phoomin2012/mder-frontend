@@ -1,7 +1,11 @@
 {
+    "button": {
+        "back": "Go back"
+    },
     "staff": {
         "username": "Username",
         "password": "Password",
+        "passwordDetail": "Please leave this field blank if don't change password.",
         "name": "Name",
         "lastName": "Lastname",
         "role": "Role",
@@ -9,9 +13,18 @@
             "physician": "Physician",
             "nurse": "Nurse"
         },
+        "nonRole": "--- Please select role for this account ---",
         "new": "New staff",
         "edit": "Edit",
-        "remove": "Remove"
+        "remove": "Remove",
+        "save": "Save",
+        "create": "Create account",
+        "form": {
+            "title": {
+                "create": "Create account",
+                "edit": "Edit account {0}"
+            }
+        }
     },
     "login": {
         "button": "Login"
@@ -35,6 +48,16 @@
             "remove": {
                 "title": "Remove account of {0} {1}?",
                 "text": "This action can't undo"
+            },
+            "success": {
+                "create": {
+                    "title": "Create new account success",
+                    "icon": "success"
+                },
+                "edit": {
+                    "title": "Save account success",
+                    "icon": "success"
+                }
             }
         }
     },

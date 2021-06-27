@@ -82,8 +82,12 @@ export default {
         preConfirm: () => {
           return this.$axios.delete(`/api/staff/${staff._id}`)
         }
-      }).then((value) => {
-
+      }).then(({ value }) => {
+        if (value.data) {
+          if (value.data.success) {
+            this.$set(this, 'items', value.data.list)
+          }
+        }
       })
     }
   }

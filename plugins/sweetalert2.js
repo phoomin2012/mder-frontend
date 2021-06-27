@@ -27,7 +27,7 @@ export let Prompt = Sweetalert.mixin({
   showLoaderOnConfirm: true
 })
 
-export default function ({ app, i18n }) {
+export default function ({ app }) {
   _Swal = Sweetalert.mixin({
     confirmButtonText: app.i18n.t('popup.close'),
     cancelButtonText: app.i18n.t('popup.cancel'),
