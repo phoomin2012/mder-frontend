@@ -1,10 +1,65 @@
 {
+    "button": {
+        "back": "Go back"
+    },
     "staff": {
         "username": "Username",
-        "password": "Password"
+        "password": "Password",
+        "passwordDetail": "Please leave this field blank if don't change password.",
+        "name": "Name",
+        "lastName": "Lastname",
+        "role": "Role",
+        "roles": {
+            "physician": "Physician",
+            "nurse": "Nurse"
+        },
+        "nonRole": "--- Please select role for this account ---",
+        "new": "New staff",
+        "edit": "Edit",
+        "remove": "Remove",
+        "save": "Save",
+        "create": "Create account",
+        "form": {
+            "title": {
+                "create": "Create account",
+                "edit": "Edit account {0}"
+            }
+        }
     },
     "login": {
         "button": "Login"
+    },
+    "sidebar": {
+        "dashboard": "Dashboard",
+        "add-patient": "Add patient",
+        "staff": "Staff Management",
+        "history": "History",
+        "logout": "Logout"
+    },
+    "table": {
+        "actions": "Actions"
+    },
+    "popup": {
+        "close": "Close",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "deny": "Deny",
+        "staff": {
+            "remove": {
+                "title": "Remove account of {0} {1}?",
+                "text": "This action can't undo"
+            },
+            "success": {
+                "create": {
+                    "title": "Create new account success",
+                    "icon": "success"
+                },
+                "edit": {
+                    "title": "Save account success",
+                    "icon": "success"
+                }
+            }
+        }
     },
     "error": {
         "form": {

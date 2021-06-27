@@ -16,7 +16,7 @@ export default {
       type: String,
       default: ''
     },
-    notTrue: {
+    noValid: {
       type: Boolean,
       default: false
     }
@@ -35,16 +35,18 @@ export default {
       if (this._errors.length === 0) {
         return null
       }
+      const reg = new RegExp(`^${this.name}\\.`)
       const result =
-        !this._errors.filter(e => e.includes(this.name)).length > 0
-      return result && this.notTrue ? null : result
+        !this._errors.filter(e => reg.test(e)).length > 0
+      return result && this.noValid ? null : result
     },
     description () {
       if (this._errors.length === 0) {
         return null
       }
 
-      const filteredErrors = this._errors.filter(e => e.includes(this.name))
+      const reg = new RegExp(`^${this.name}\\.`)
+      const filteredErrors = this._errors.filter(e => reg.test(e))
       if (filteredErrors.length > 0) {
         return this.$t('error.form.' + (this.prefix ? this.prefix + '.' : '') + filteredErrors[0])
       }

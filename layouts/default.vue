@@ -66,7 +66,6 @@ div#__nuxt {
     &:last-child {
       flex-grow: 1;
       background: #e5e5e5;
-      overflow: auto;
       padding: 2.5rem;
     }
   }
