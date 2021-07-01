@@ -26,6 +26,28 @@
             }
         }
     },
+    "patient": {
+        "hospitalId": "Hospital ID",
+        "bedNumber": "Bed Number",
+        "name": "Name",
+        "lastName": "Lastname",
+        "triage": "Triage",
+        "stage": "Stage",
+        "entryTime": "Entry time",
+        "create": "Add patient into system",
+        "stages": {
+            "null": "--- Please select stage of patient ---",
+            "triage": "Triage",
+            "investigation": "Investigation",
+            "consultation": "Consultation",
+            "diagnosis": "Diagnosis",
+            "treatment": "Treatment",
+            "disposition": "Disposition",
+            "discharged": "Discharged",
+            "admitted": "Admitted",
+            "transferred": "Transferred"
+        }
+    },
     "login": {
         "button": "Login"
     },

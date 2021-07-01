@@ -26,6 +26,28 @@
             }
         }
     },
+    "patient": {
+        "hospitalId": "Hospital ID",
+        "bedNumber": "หมายเลขเตียง",
+        "name": "ชื่อ",
+        "lastName": "นามสกุล",
+        "triage": "Triage",
+        "stage": "Stage",
+        "entryTime": "เวลาเข้า",
+        "create": "เพิ่มผู้ป่วยเข้าสู่ระบบ",
+        "stages": {
+            "null": "--- โปรดเลือกสถานะผู้ป่วย ---",
+            "triage": "Triage",
+            "investigation": "Investigation",
+            "consultation": "Consultation",
+            "diagnosis": "Diagnosis",
+            "treatment": "Treatment",
+            "disposition": "Disposition",
+            "discharged": "Discharged",
+            "admitted": "Admitted",
+            "transferred": "Transferred"
+        }
+    },
     "login": {
         "button": "เข้าสู่ระบบ"
     },
