@@ -18,7 +18,7 @@ export function disconnectSocket () {
   socket.disconnect()
 }
 
-export default function ({ app, i18n }) {
+export default function ({ app, i18n, store }) {
   const timer = setInterval(() => {
     if (app.$auth) {
       socket.on('message', (data) => {
@@ -35,4 +35,24 @@ export default function ({ app, i18n }) {
       clearTimeout(timer)
     }
   }, 300)
+
+  socket.on('patient.add', (patient) => {
+    console.log('[Socket] patient.add', patient)
+    store.commit('patient/add', patient)
+  })
+
+  socket.on('patient.update', (patient) => {
+    console.log('[Socket] patient.update', patient)
+    store.commit('patient/update', patient)
+  })
+
+  socket.on('patient.remove', (patientId) => {
+    console.log('[Socket] patient.remove', patientId)
+    store.commit('patient/remove', patientId)
+  })
+
+  socket.on('patient.all', (patients) => {
+    console.log('[Socket] patient.all', patients)
+    store.commit('patient/all', patients)
+  })
 }
