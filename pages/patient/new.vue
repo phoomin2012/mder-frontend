@@ -5,12 +5,12 @@
       Patient Information
     </h1>
     <b-card>
-      <b-form>
+      <b-form @submit.prevent.stop="submitForm">
         <b-row>
           <b-col cols="6" sm="6">
-            <error-handle v-slot="{ state, invalidFeedback }" :errors="form.errors" name="hospitalId" prefix="patient">
-              <b-form-group :state="state" :invalid-feedback="invalidFeedback" :label="$t('patient.hospitalId')">
-                <b-input v-model="form.hospitalId" />
+            <error-handle v-slot="{ state, invalidFeedback }" :errors="form.errors" name="hospitalNumber" prefix="patient">
+              <b-form-group :state="state" :invalid-feedback="invalidFeedback" :label="$t('patient.hospitalNumber')">
+                <b-input v-model="form.hospitalNumber" required />
               </b-form-group>
             </error-handle>
           </b-col>
@@ -26,7 +26,7 @@
           <b-col cols="6" sm="6">
             <error-handle v-slot="{ state, invalidFeedback }" :errors="form.errors" name="name" prefix="patient">
               <b-form-group :state="state" :invalid-feedback="invalidFeedback" :label="$t('patient.name')">
-                <b-input v-model="form.name" />
+                <b-input v-model="form.name" required />
               </b-form-group>
             </error-handle>
           </b-col>
@@ -34,28 +34,22 @@
           <b-col cols="6" sm="6">
             <error-handle v-slot="{ state, invalidFeedback }" :errors="form.errors" name="lastName" prefix="patient">
               <b-form-group :state="state" :invalid-feedback="invalidFeedback" :label="$t('patient.lastName')">
-                <b-input v-model="form.lastName" />
+                <b-input v-model="form.lastName" required />
               </b-form-group>
             </error-handle>
           </b-col>
 
           <b-col cols="6" md="2">
+            <b-form-group>
+              <b-checkbox v-model="form.ventilator" required>
+                {{ $t('patient.ventilator') }}
+              </b-checkbox>
+            </b-form-group>
+
             <error-handle v-slot="{ state, invalidFeedback }" :errors="form.errors" name="triage" prefix="patient">
               <b-form-group :state="state" :invalid-feedback="invalidFeedback" :label="$t('patient.triage')">
-                <b-form-radio v-model="form.stage" name="patient-triage" :value="5">
-                  5
-                </b-form-radio>
-                <b-form-radio v-model="form.stage" name="patient-triage" :value="4">
-                  4
-                </b-form-radio>
-                <b-form-radio v-model="form.stage" name="patient-triage" :value="3">
-                  3
-                </b-form-radio>
-                <b-form-radio v-model="form.stage" name="patient-triage" :value="2">
-                  2
-                </b-form-radio>
-                <b-form-radio v-model="form.stage" name="patient-triage" :value="1">
-                  1
+                <b-form-radio v-for="(label, level) in $t('patient.triages')" :key="level" v-model="form.triage" name="patient-triage" :value="parseInt(level)">
+                  {{ label }}
                 </b-form-radio>
               </b-form-group>
             </error-handle>
@@ -68,32 +62,33 @@
                   <b-select-option :value="null">
                     {{ $t('patient.stages.null') }}
                   </b-select-option>
-                  <b-select-option :value="0">
+                  <b-select-option :value="1">
                     {{ $t('patient.stages.triage') }}
                   </b-select-option>
-                  <b-select-option :value="1">
+                  <b-select-option :value="2">
                     {{ $t('patient.stages.investigation') }}
                   </b-select-option>
-                  <b-select-option :value="2">
+                  <b-select-option :value="3">
                     {{ $t('patient.stages.consultation') }}
                   </b-select-option>
-                  <b-select-option :value="3">
+                  <b-select-option :value="4">
                     {{ $t('patient.stages.diagnosis') }}
                   </b-select-option>
-                  <b-select-option :value="4">
+                  <b-select-option :value="5">
                     {{ $t('patient.stages.treatment') }}
                   </b-select-option>
-                  <b-select-option-group :label="$t('patient.stages.disposition')">
-                    <b-select-option :value="50">
-                      {{ $t('patient.stages.discharged') }}
-                    </b-select-option>
-                    <b-select-option :value="51">
-                      {{ $t('patient.stages.admitted') }}
-                    </b-select-option>
-                    <b-select-option :value="51">
-                      {{ $t('patient.stages.transferred') }}
-                    </b-select-option>
-                  </b-select-option-group>
+                  <b-select-option :value="60">
+                    {{ $t('patient.stages.disposition') }}
+                  </b-select-option>
+                  <b-select-option :value="61">
+                    {{ $t('patient.stages.discharged') }}
+                  </b-select-option>
+                  <b-select-option :value="62">
+                    {{ $t('patient.stages.admitted') }}
+                  </b-select-option>
+                  <b-select-option :value="63">
+                    {{ $t('patient.stages.transferred') }}
+                  </b-select-option>
                 </b-select>
               </b-form-group>
             </error-handle>
@@ -103,15 +98,15 @@
             <error-handle v-slot="{ state, invalidFeedback }" :errors="form.errors" name="entryTime" prefix="patient">
               <b-form-group :state="state" :invalid-feedback="invalidFeedback" :label="$t('patient.entryTime')">
                 <b-input-group>
-                  <b-form-datepicker v-model="form.entryDate" locale="th" :date-format-options="{year: 'numeric', month: 'numeric', day: 'numeric'}" />
-                  <b-form-timepicker v-model="form.entryTime" locale="th" />
+                  <b-form-datepicker v-model="form.entryDate" locale="th" :date-format-options="{year: 'numeric', month: 'numeric', day: 'numeric'}" required />
+                  <b-form-timepicker v-model="form.entryTime" locale="th" required />
                 </b-input-group>
               </b-form-group>
             </error-handle>
           </b-col>
         </b-row>
 
-        <b-button variant="success" class="float-right">
+        <b-button variant="success" class="float-right" type="submit">
           <fa-icon icon="plus" />
           {{ $t('patient.create') }}
         </b-button>
@@ -130,16 +125,46 @@ export default {
     return {
       form: {
         errors: [],
-        hospitalId: '',
+        hospitalNumber: '',
         bedNumber: '',
         name: '',
         lastName: '',
+        ventilator: false,
         triage: 5,
         stage: null,
         entryDate: format(new Date(), 'yyyy-MM-dd'),
-        entryTime: format(new Date(), 'hh:mm'),
+        entryTime: format(new Date(), 'HH:mm') + ':00',
         loading: false
       }
+    }
+  },
+  methods: {
+    async submitForm () {
+      this.form.loading = true
+      this.form.errors = []
+      try {
+        await this.$axios.post('/api/patient', {
+          id: null,
+          hospitalNumber: this.form.hospitalNumber,
+          bedNumber: this.form.bedNumber,
+          name: this.form.name,
+          lastName: this.form.lastName,
+          triage: this.form.triage,
+          stage: this.form.stage,
+          entryDate: this.form.entryDate,
+          entryTime: this.form.entryTime
+        })
+        this.$router.push('/dashboard')
+      } catch (e) {
+        if (e.response) {
+          if (e.response.data.error) {
+            if (e.response.data.error.form) {
+              this.$set(this.form, 'errors', e.response.data.error.form)
+            }
+          }
+        }
+      }
+      this.form.loading = false
     }
   }
 }

@@ -27,11 +27,19 @@
         }
     },
     "patient": {
-        "hospitalId": "Hospital ID",
+        "hospitalNumber": "Hospital Number",
         "bedNumber": "หมายเลขเตียง",
         "name": "ชื่อ",
         "lastName": "นามสกุล",
+        "ventilator": "ใช้เครื่องช่วยหายใจ",
         "triage": "Triage",
+        "triages": {
+            "5": "5 - General",
+            "4": "4 - ",
+            "3": "3 - Normal",
+            "2": "2 - Risk ",
+            "1": "1 - High risk"
+        },
         "stage": "Stage",
         "entryTime": "เวลาเข้า",
         "create": "เพิ่มผู้ป่วยเข้าสู่ระบบ",
@@ -43,10 +51,16 @@
             "diagnosis": "Diagnosis",
             "treatment": "Treatment",
             "disposition": "Disposition",
-            "discharged": "Discharged",
-            "admitted": "Admitted",
-            "transferred": "Transferred"
+            "discharged": "Disposition - Discharged",
+            "admitted": "Disposition - Admitted",
+            "transferred": "Disposition - Transferred"
         }
+    },
+    "dashboard": {
+        "staffCount": "หมอ/พยาบาล",
+        "currentPatient": "ยอดผู้ป่วยปัจจุบัน",
+        "patientToday": "ยอดผู้ป่วยวันนี้",
+        "time": "เวลา"
     },
     "login": {
         "button": "เข้าสู่ระบบ"
@@ -60,6 +74,11 @@
     },
     "table": {
         "actions": "ตัวเลือก"
+    },
+    "date": {
+        "today": "วันนี้",
+        "yesterday": "เมื่อวาน",
+        "dayPast": "{0} วัน | {0} วัน"
     },
     "popup": {
         "close": "ปิด",
