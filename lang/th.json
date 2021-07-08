@@ -34,14 +34,16 @@
         "ventilator": "ใช้เครื่องช่วยหายใจ",
         "triage": "Triage",
         "triages": {
-            "5": "5 - General",
-            "4": "4 - ",
-            "3": "3 - Normal",
-            "2": "2 - Risk ",
-            "1": "1 - High risk"
+            "5": "5 - Non-Urgency",
+            "4": "4 - Less Urgency",
+            "3": "3 - Urgency",
+            "2": "2 - Emergency",
+            "1": "1 - Resuscitation"
         },
         "stage": "Stage",
         "entryTime": "เวลาเข้า",
+        "entryAndExit": "เวลาเข้า/ออก",
+        "timeInterval": "Time Interval",
         "create": "เพิ่มผู้ป่วยเข้าสู่ระบบ",
         "stages": {
             "null": "--- โปรดเลือกสถานะผู้ป่วย ---",
@@ -54,7 +56,10 @@
             "discharged": "Disposition - Discharged",
             "admitted": "Disposition - Admitted",
             "transferred": "Disposition - Transferred"
-        }
+        },
+        "information": "ข้อมูลผู้ป่วย",
+        "edit": "แก้ไขข้อมูลผู้ป่วย",
+        "remove": "ลบข้อมูลออกจากระบบ"
     },
     "dashboard": {
         "staffCount": "หมอ/พยาบาล",
