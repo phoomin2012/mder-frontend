@@ -36,22 +36,22 @@ export default function ({ app, i18n, store }) {
     }
   }, 300)
 
-  socket.on('patient.add', (patient) => {
+  socket.on('patient.add', function socketOnPatientAdd (patient) {
     console.log('[Socket] patient.add', patient)
     store.commit('patient/add', patient)
   })
 
-  socket.on('patient.update', (patient) => {
+  socket.on('patient.update', function socketOnPatientUpdate (patient) {
     console.log('[Socket] patient.update', patient)
     store.commit('patient/update', patient)
   })
 
-  socket.on('patient.remove', (patientId) => {
+  socket.on('patient.remove', function socketOnPatientRemove (patientId) {
     console.log('[Socket] patient.remove', patientId)
     store.commit('patient/remove', patientId)
   })
 
-  socket.on('patient.all', (patients) => {
+  socket.on('patient.all', function socketOnPatientAll (patients) {
     console.log('[Socket] patient.all', patients)
     store.commit('patient/all', patients)
   })
