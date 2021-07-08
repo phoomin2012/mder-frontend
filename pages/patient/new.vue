@@ -26,7 +26,7 @@
           <b-col cols="6" sm="6">
             <error-handle v-slot="{ state, invalidFeedback }" :errors="form.errors" name="name" prefix="patient">
               <b-form-group :state="state" :invalid-feedback="invalidFeedback" :label="$t('patient.name')">
-                <b-input v-model="form.name" required />
+                <b-input v-model="form.name" />
               </b-form-group>
             </error-handle>
           </b-col>
@@ -34,7 +34,7 @@
           <b-col cols="6" sm="6">
             <error-handle v-slot="{ state, invalidFeedback }" :errors="form.errors" name="lastName" prefix="patient">
               <b-form-group :state="state" :invalid-feedback="invalidFeedback" :label="$t('patient.lastName')">
-                <b-input v-model="form.lastName" required />
+                <b-input v-model="form.lastName" />
               </b-form-group>
             </error-handle>
           </b-col>
