@@ -50,7 +50,7 @@
         <b-card no-body>
           <b-table :fields="fields" :items="patientFiltered" responsive class="mb-0">
             <template #cell(hospitalNumber)="data">
-              <b-button block variant="outline-success">
+              <b-button block variant="outline-success" @click.prevent="openPatientPopup(data.item)">
                 {{ data.item.hospitalNumber }}
               </b-button>
             </template>
@@ -87,6 +87,62 @@
         </b-card>
       </b-col>
     </b-row>
+
+    <b-modal ref="modal-patient" hide-footer>
+      <template #modal-title>
+        <fa-icon icon="user-injured" class="mr-2" /> Patient Information
+      </template>
+      <table v-if="selectedPatient" class="table">
+        <tr>
+          <td>{{ $t('patient.hospitalNumber') }}</td>
+          <td>{{ selectedPatient.hospitalNumber }}</td>
+        </tr>
+        <tr>
+          <td>{{ $t('patient.bedNumber') }}</td>
+          <td>{{ selectedPatient.bedNumber }}</td>
+        </tr>
+        <tr>
+          <td>{{ $t('patient.name') }}</td>
+          <td>{{ selectedPatient.name }}</td>
+        </tr>
+        <tr>
+          <td>{{ $t('patient.lastName') }}</td>
+          <td>{{ selectedPatient.lastName }}</td>
+        </tr>
+        <tr>
+          <td>{{ $t('patient.ventilator') }}</td>
+          <td>{{ selectedPatient.ventilator }}</td>
+        </tr>
+        <tr>
+          <td>{{ $t('patient.triage') }}</td>
+          <td>{{ selectedPatient.triage }}</td>
+        </tr>
+        <tr>
+          <td>{{ $t('patient.stage') }}</td>
+          <td>{{ selectedPatient.currentStage }}</td>
+        </tr>
+        <tr>
+          <td>{{ $t('patient.entryAndExit') }}</td>
+          <td>{{ dateFormatShort(selectedPatient.entry) }}/{{ dateFormatShort(selectedPatient.exit) }}</td>
+        </tr>
+        <tr>
+          <td>{{ $t('patient.timeInterval') }}</td>
+          <td>{{ selectedPatient.timeInterval }}</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="text-right">
+            <b-button size="sm" variant="danger">
+              <fa-icon icon="trash-alt" class="mr-2" />
+              {{ $t('patient.remove') }}
+            </b-button>
+            <b-button size="sm" variant="warning">
+              <fa-icon icon="edit" class="mr-2" />
+              {{ $t('patient.edit') }}
+            </b-button>
+          </td>
+        </tr>
+      </table>
+    </b-modal>
   </div>
 </template>
 
@@ -100,7 +156,8 @@ export default {
   data () {
     return {
       now: new Date(),
-      timer: null
+      timer: null,
+      selectedPatient: null
     }
   },
   computed: {
@@ -184,6 +241,12 @@ export default {
         return this.$tc('date.dayPast', duration.days, [duration.days])
       }
     },
+    dateFormatShort (date) {
+      if (!date) {
+        return '-'
+      }
+      return format(parseJSON(date), 'dd/MM/yyyy HH:mm:ss', { locale: this.dateLocale })
+    },
     currentStageTimeInterval (stage) {
       const duration = intervalToDuration({
         start: parseJSON(stage.start),
@@ -203,6 +266,10 @@ export default {
     },
     stageProgressColor (number) {
       return PatientStageColor[number]
+    },
+    openPatientPopup (patient) {
+      this.$set(this, 'selectedPatient', patient)
+      this.$refs['modal-patient'].show()
     }
   }
 }
