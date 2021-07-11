@@ -56,7 +56,8 @@
             </template>
             <template #cell(bedNumber)="data">
               <h3 class="text-center mb-0">
-                {{ data.item.bedNumber }}
+                <span v-if="data.item.bedNumber">{{ data.item.bedNumber }}</span>
+                <span v-else class="text-muted">-</span>
               </h3>
             </template>
             <template #cell(triage)="data">
@@ -92,56 +93,7 @@
       <template #modal-title>
         <fa-icon icon="user-injured" class="mr-2" /> Patient Information
       </template>
-      <table v-if="selectedPatient" class="table">
-        <tr>
-          <td>{{ $t('patient.hospitalNumber') }}</td>
-          <td>{{ selectedPatient.hospitalNumber }}</td>
-        </tr>
-        <tr>
-          <td>{{ $t('patient.bedNumber') }}</td>
-          <td>{{ selectedPatient.bedNumber }}</td>
-        </tr>
-        <tr>
-          <td>{{ $t('patient.name') }}</td>
-          <td>{{ selectedPatient.name }}</td>
-        </tr>
-        <tr>
-          <td>{{ $t('patient.lastName') }}</td>
-          <td>{{ selectedPatient.lastName }}</td>
-        </tr>
-        <tr>
-          <td>{{ $t('patient.ventilator') }}</td>
-          <td>{{ selectedPatient.ventilator }}</td>
-        </tr>
-        <tr>
-          <td>{{ $t('patient.triage') }}</td>
-          <td>{{ selectedPatient.triage }}</td>
-        </tr>
-        <tr>
-          <td>{{ $t('patient.stage') }}</td>
-          <td>{{ selectedPatient.currentStage }}</td>
-        </tr>
-        <tr>
-          <td>{{ $t('patient.entryAndExit') }}</td>
-          <td>{{ dateFormatShort(selectedPatient.entry) }}/{{ dateFormatShort(selectedPatient.exit) }}</td>
-        </tr>
-        <tr>
-          <td>{{ $t('patient.timeInterval') }}</td>
-          <td>{{ selectedPatient.timeInterval }}</td>
-        </tr>
-        <tr>
-          <td colspan="2" class="text-right">
-            <b-button size="sm" variant="danger">
-              <fa-icon icon="trash-alt" class="mr-2" />
-              {{ $t('patient.remove') }}
-            </b-button>
-            <b-button size="sm" variant="warning">
-              <fa-icon icon="edit" class="mr-2" />
-              {{ $t('patient.edit') }}
-            </b-button>
-          </td>
-        </tr>
-      </table>
+      <popup-patient v-if="selectedPatient" :patient-id="selectedPatient" @remove="$refs['modal-patient'].hide()" />
     </b-modal>
   </div>
 </template>
@@ -151,8 +103,12 @@ import { format, parseJSON, isToday, isYesterday, intervalToDuration } from 'dat
 import { enUS, th } from 'date-fns/locale'
 import { mapGetters } from 'vuex'
 import { PatientStageColor, PatientTriageColor, PatientStageNumber } from '@/service/patient'
+import PopupPatient from '~/components/patientInformation.vue'
 
 export default {
+  components: {
+    PopupPatient
+  },
   data () {
     return {
       now: new Date(),
@@ -268,7 +224,7 @@ export default {
       return PatientStageColor[number]
     },
     openPatientPopup (patient) {
-      this.$set(this, 'selectedPatient', patient)
+      this.$set(this, 'selectedPatient', patient._id)
       this.$refs['modal-patient'].show()
     }
   }
