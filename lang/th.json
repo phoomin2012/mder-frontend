@@ -42,6 +42,7 @@
         },
         "stage": "Stage",
         "entryTime": "เวลาเข้า",
+        "exitTime": "เวลาออก",
         "entryAndExit": "เวลาเข้า/ออก",
         "timeInterval": "Time Interval",
         "create": "เพิ่มผู้ป่วยเข้าสู่ระบบ",
@@ -59,7 +60,9 @@
         },
         "information": "ข้อมูลผู้ป่วย",
         "edit": "แก้ไขข้อมูลผู้ป่วย",
-        "remove": "ลบข้อมูลออกจากระบบ"
+        "remove": "ลบข้อมูลออกจากระบบ",
+        "cancelEdit": "ยกเลิก",
+        "saveEdit": "บันทึกข้อมูลผู้ป่วย"
     },
     "dashboard": {
         "staffCount": "หมอ/พยาบาล",
@@ -102,6 +105,30 @@
                 },
                 "edit": {
                     "title": "บันทึกการแก้ไขบัญชีสำเร็จ",
+                    "icon": "success"
+                },
+                "remove": {
+                    "title": "ลบบัญชีผู้ใช้สำเร็จ",
+                    "icon": "success"
+                }
+            }
+        },
+        "patient": {
+            "remove": {
+                "title": "ยืนยันการลบผู้ป่วย {1} {2} ({0})",
+                "text": "เมื่อลบแล้วจะไม่สามารถกู้คืนข้อมูลได้"
+            },
+            "success": {
+                "create": {
+                    "title": "เพิ่มข้อมูลผู่ป่วยสำเร็จ",
+                    "icon": "success"
+                },
+                "edit": {
+                    "title": "บันทึกข้อมูลผู้ป่วยสำเร็จ",
+                    "icon": "success"
+                },
+                "remove": {
+                    "title": "ลบข้อมูลผู้ป่วยสำเร็จ",
                     "icon": "success"
                 }
             }

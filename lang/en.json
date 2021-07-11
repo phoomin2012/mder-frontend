@@ -16,7 +16,7 @@
         "nonRole": "--- Please select role for this account ---",
         "new": "New staff",
         "edit": "Edit",
-        "remove": "Remove",
+        "remove": "Delete",
         "save": "Save",
         "create": "Create account",
         "form": {
@@ -42,6 +42,7 @@
         },
         "stage": "Stage",
         "entryTime": "Entry time",
+        "exitTime": "Exit time",
         "entryAndExit": "Entry/Exit time",
         "timeInterval": "Time Interval",
         "create": "Add patient into system",
@@ -59,7 +60,9 @@
         },
         "information": "Patient Information",
         "edit": "Edit information",
-        "remove": "Remove from system"
+        "remove": "Remove from system",
+        "cancelEdit": "Cancel",
+        "saveEdit": "Save information"
     },
     "dashboard": {
         "staffCount": "Physician/Nurse",
@@ -102,6 +105,30 @@
                 },
                 "edit": {
                     "title": "Save account success",
+                    "icon": "success"
+                },
+                "remove": {
+                    "title": "Remove account success",
+                    "icon": "success"
+                }
+            }
+        },
+        "patient": {
+            "remove": {
+                "title": "Confirm remove patient {1} {2} ({0})",
+                "text": "This action can't undo"
+            },
+            "success": {
+                "create": {
+                    "title": "Add new patient success",
+                    "icon": "success"
+                },
+                "edit": {
+                    "title": "Save patient information success",
+                    "icon": "success"
+                },
+                "remove": {
+                    "title": "Remove patient success",
                     "icon": "success"
                 }
             }
