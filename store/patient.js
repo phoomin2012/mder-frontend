@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export const state = () => ({
   list: []
 })
@@ -10,7 +12,7 @@ export const getters = {
 export const mutations = {
   add (state, patient) {
     const index = state.list.findIndex(p => p._id === patient._id)
-    if (index && index >= 0) {
+    if (index >= 0) {
       state.list[index] = patient
     } else {
       state.list.push(patient)
@@ -18,8 +20,8 @@ export const mutations = {
   },
   update (state, patient) {
     const index = state.list.findIndex(p => p._id === patient._id)
-    if (index) {
-      state.list[index] = patient
+    if (index >= 0) {
+      Vue.set(state.list, index, patient)
     }
   },
   remove (state, patientId) {
