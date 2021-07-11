@@ -40,12 +40,6 @@
           </b-col>
 
           <b-col cols="6" md="2">
-            <b-form-group>
-              <b-checkbox v-model="form.ventilator" required>
-                {{ $t('patient.ventilator') }}
-              </b-checkbox>
-            </b-form-group>
-
             <error-handle v-slot="{ state, invalidFeedback }" :errors="form.errors" name="triage" prefix="patient">
               <b-form-group :state="state" :invalid-feedback="invalidFeedback" :label="$t('patient.triage')">
                 <b-form-radio v-for="(label, level) in $t('patient.triages')" :key="level" v-model="form.triage" name="patient-triage" :value="parseInt(level)">
@@ -118,6 +112,7 @@
 <script>
 import { format } from 'date-fns'
 import errorHandle from '~/components/error-handle.vue'
+import { Toast } from '~/plugins/sweetalert2'
 
 export default {
   components: { errorHandle },
@@ -129,7 +124,6 @@ export default {
         bedNumber: '',
         name: '',
         lastName: '',
-        ventilator: false,
         triage: 5,
         stage: null,
         entryDate: format(new Date(), 'yyyy-MM-dd'),
@@ -154,6 +148,7 @@ export default {
           entryDate: this.form.entryDate,
           entryTime: this.form.entryTime
         })
+        Toast(this.$t('popup.patient.success.create'))
         this.$router.push('/dashboard')
       } catch (e) {
         if (e.response) {
