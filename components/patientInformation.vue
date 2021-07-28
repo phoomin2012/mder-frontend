@@ -19,6 +19,13 @@
           <td>{{ patient.lastName }}</td>
         </tr>
         <tr>
+          <td>{{ $t('patient.ventilator') }}</td>
+          <td>
+            <fa-icon v-if="patient.ventilator" icon="check" />
+            <fa-icon v-else icon="times" />
+          </td>
+        </tr>
+        <tr>
           <td>{{ $t('patient.triage') }}</td>
           <td>
             <span :style="{color: triageTextColor(patient.triage)}">{{ patient.triage }}</span>
@@ -95,6 +102,20 @@
             <error-handle v-slot="{ state, invalidFeedback }" :errors="form.errors" name="lastName" prefix="patient">
               <b-form-group :state="state" :invalid-feedback="invalidFeedback" class="mb-0">
                 <b-input v-model="form.lastName" :readonly="form.loading" />
+              </b-form-group>
+            </error-handle>
+          </td>
+        </tr>
+        <tr>
+          <td class="align-middle">
+            {{ $t('patient.ventilator') }}
+          </td>
+          <td>
+            <error-handle v-slot="{ state, invalidFeedback }" :errors="form.errors" name="triage" prefix="patient">
+              <b-form-group :state="state" :invalid-feedback="invalidFeedback" class="mb-0">
+                <b-checkbox v-model="form.ventilator" :disabled="form.loading">
+                  {{ $t('patient.ventilator') }}
+                </b-checkbox>
               </b-form-group>
             </error-handle>
           </td>
@@ -234,6 +255,7 @@ export default {
         bedNumber: '',
         name: '',
         lastName: '',
+        ventilator: false,
         triage: 5,
         stage: null,
         entryDate: format(new Date(), 'yyyy-MM-dd'),
