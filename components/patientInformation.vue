@@ -354,7 +354,7 @@ export default {
         if (value.data) {
           if (value.data.success) {
             this.$emit('remove')
-            Toast(this.$t('popup.patient.success.remove'))
+            Toast.fire(this.$t('popup.patient.success.remove'))
           }
         }
       })
@@ -369,13 +369,14 @@ export default {
           bedNumber: this.form.bedNumber,
           name: this.form.name,
           lastName: this.form.lastName,
+          ventilator: this.form.ventilator,
           triage: this.form.triage,
           stage: this.form.stage,
           entryDate: this.form.entryDate,
           entryTime: this.form.entryTime
         })
         this.isEdit = false
-        Toast(this.$t('popup.patient.success.edit'))
+        Toast.fire(this.$t('popup.patient.success.edit'))
       } catch (e) {
         if (e.response) {
           if (e.response.data.error) {

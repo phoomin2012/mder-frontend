@@ -52,7 +52,7 @@
           <b-col cols="6" md="6">
             <error-handle v-slot="{ state, invalidFeedback }" :errors="form.errors" name="stage" prefix="patient">
               <b-form-group :state="state" :invalid-feedback="invalidFeedback" :label="$t('patient.stage')">
-                <b-select v-model="form.stage">
+                <b-select v-model="form.stage" :state="state">
                   <b-select-option :value="null">
                     {{ $t('patient.stages.null') }}
                   </b-select-option>
@@ -112,7 +112,7 @@
 <script>
 import { format } from 'date-fns'
 import errorHandle from '~/components/error-handle.vue'
-import { Toast } from '~/plugins/sweetalert2'
+import { Swal, Toast } from '~/plugins/sweetalert2'
 
 export default {
   components: { errorHandle },
@@ -148,16 +148,18 @@ export default {
           entryDate: this.form.entryDate,
           entryTime: this.form.entryTime
         })
-        Toast(this.$t('popup.patient.success.create'))
+        Toast.fire(this.$t('popup.patient.success.create'))
         this.$router.push('/dashboard')
       } catch (e) {
         if (e.response) {
           if (e.response.data.error) {
             if (e.response.data.error.form) {
               this.$set(this.form, 'errors', e.response.data.error.form)
+              return
             }
           }
         }
+        Swal.fire(this.$t('error.popup.request'))
       }
       this.form.loading = false
     }

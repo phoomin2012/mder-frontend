@@ -86,7 +86,7 @@ export default {
         if (value.data) {
           if (value.data.success) {
             this.$set(this, 'items', value.data.list)
-            Toast(this.$t('popup.staff.success.remove'))
+            Toast.fire(this.$t('popup.staff.success.remove'))
           }
         }
       })
