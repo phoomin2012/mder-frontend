@@ -66,14 +66,12 @@
               </h3>
             </template>
             <template #cell(stages)="data">
-              <b-progress max="100">
+              <b-progress :max="6">
                 <b-progress-bar
-                  v-for="(stage, i) in data.item.stages"
-                  :key="i"
-                  v-b-tooltip.hover="stageName(stage.stage)"
-                  :animated="i == data.item.stages.length - 1"
-                  :value="10"
-                  :variant="stageProgressColor(stage.stage)"
+                  v-b-tooltip.hover="stageName(data.item.currentStage)"
+                  animated
+                  :value="data.item.currentStage > 6 ? 6 : data.item.currentStage"
+                  :variant="stageProgressColor(data.item.currentStage)"
                 />
               </b-progress>
             </template>
@@ -99,7 +97,7 @@
 </template>
 
 <script>
-import { format, parseJSON, isToday, isYesterday, intervalToDuration } from 'date-fns'
+import { format, parseJSON, isToday, isYesterday, intervalToDuration, differenceInSeconds } from 'date-fns'
 import { enUS, th } from 'date-fns/locale'
 import { mapGetters } from 'vuex'
 import { PatientStageColor, PatientTriageColor, PatientStageNumber } from '@/service/patient'
@@ -136,7 +134,19 @@ export default {
       patients: 'patient/all'
     }),
     patientFiltered () {
-      return this.patients
+      const patientList = [...this.patients]
+      return patientList.sort((first, second) => {
+        if (first.triage < second.triage) {
+          return -1
+        } else if (first.triage > second.triage) {
+          return 1
+        } else {
+          // ถ้าระดับ Triage เท่ากันให้เทียบ time interval
+          const t1 = differenceInSeconds(parseJSON(first.stages[first.stages.length - 1].start), new Date())
+          const t2 = differenceInSeconds(parseJSON(second.stages[second.stages.length - 1].start), new Date())
+          return t1 - t2
+        }
+      })
     },
     fields () {
       return [
