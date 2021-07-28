@@ -13,7 +13,7 @@ export let Toast = Sweetalert.mixin({
   position: 'top-end',
   showConfirmButton: false,
   timer: 3000,
-  timerProgressBar: true,
+  timerProgressBar: false,
   didOpen: (toast) => {
     toast.addEventListener('mouseenter', Sweetalert.stopTimer)
     toast.addEventListener('mouseleave', Sweetalert.resumeTimer)

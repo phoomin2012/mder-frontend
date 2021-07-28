@@ -26,6 +26,50 @@
             }
         }
     },
+    "patient": {
+        "hospitalNumber": "Hospital Number",
+        "bedNumber": "หมายเลขเตียง",
+        "name": "ชื่อ",
+        "lastName": "นามสกุล",
+        "ventilator": "ใช้เครื่องช่วยหายใจ",
+        "triage": "Triage",
+        "triages": {
+            "5": "5 - Non-Urgency",
+            "4": "4 - Less Urgency",
+            "3": "3 - Urgency",
+            "2": "2 - Emergency",
+            "1": "1 - Resuscitation"
+        },
+        "stage": "Stage",
+        "entryTime": "เวลาเข้า",
+        "exitTime": "เวลาออก",
+        "entryAndExit": "เวลาเข้า/ออก",
+        "timeInterval": "Time Interval",
+        "create": "เพิ่มผู้ป่วยเข้าสู่ระบบ",
+        "stages": {
+            "null": "--- โปรดเลือกสถานะผู้ป่วย ---",
+            "triage": "Triage",
+            "investigation": "Investigation",
+            "consultation": "Consultation",
+            "diagnosis": "Diagnosis",
+            "treatment": "Treatment",
+            "disposition": "Disposition",
+            "discharged": "Disposition - Discharged",
+            "admitted": "Disposition - Admitted",
+            "transferred": "Disposition - Transferred"
+        },
+        "information": "ข้อมูลผู้ป่วย",
+        "edit": "แก้ไขข้อมูลผู้ป่วย",
+        "remove": "ลบข้อมูลออกจากระบบ",
+        "cancelEdit": "ยกเลิก",
+        "saveEdit": "บันทึกข้อมูลผู้ป่วย"
+    },
+    "dashboard": {
+        "staffCount": "หมอ/พยาบาล",
+        "currentPatient": "ยอดผู้ป่วยปัจจุบัน",
+        "patientToday": "ยอดผู้ป่วยวันนี้",
+        "time": "เวลา"
+    },
     "login": {
         "button": "เข้าสู่ระบบ"
     },
@@ -38,6 +82,11 @@
     },
     "table": {
         "actions": "ตัวเลือก"
+    },
+    "date": {
+        "today": "วันนี้",
+        "yesterday": "เมื่อวาน",
+        "dayPast": "{0} วัน | {0} วัน"
     },
     "popup": {
         "close": "ปิด",
@@ -56,6 +105,30 @@
                 },
                 "edit": {
                     "title": "บันทึกการแก้ไขบัญชีสำเร็จ",
+                    "icon": "success"
+                },
+                "remove": {
+                    "title": "ลบบัญชีผู้ใช้สำเร็จ",
+                    "icon": "success"
+                }
+            }
+        },
+        "patient": {
+            "remove": {
+                "title": "ยืนยันการลบผู้ป่วย {1} {2} ({0})",
+                "text": "เมื่อลบแล้วจะไม่สามารถกู้คืนข้อมูลได้"
+            },
+            "success": {
+                "create": {
+                    "title": "เพิ่มข้อมูลผู่ป่วยสำเร็จ",
+                    "icon": "success"
+                },
+                "edit": {
+                    "title": "แก้ไขผู้ป่วยสำเร็จ",
+                    "icon": "success"
+                },
+                "remove": {
+                    "title": "ลบผู้ป่วยสำเร็จ",
                     "icon": "success"
                 }
             }
@@ -89,6 +162,34 @@
                 "role": {
                     "empty": "กรุณาเลือกตำแหน่ง",
                     "invalid": "โปรดเลือกตำแหน่งให้ถูกต้อง"
+                }
+            },
+            "patient": {
+                "hospitalNumber": {
+                    "empty": "กรุณากรอกหมายเลข Hospital Number"
+                },
+                "bedNumber": {
+                    "empty": "กรุณากรอกหมายเลขเตียง"
+                },
+                "name": {
+                    "empty": "กรุณากรอกชื่อผู้ป่วย"
+                },
+                "lastName": {
+                    "empty": "กรุณากรอกนามสกุลผู้ป่วย"
+                },
+                "triage": {
+                    "empty": "กรุณาเลือกระดับความรุนแรง",
+                    "invalid": "กรุณาเลือกระดับความรุนแรงจาก 1 ถึง 5"
+                },
+                "stage": {
+                    "empty": "กรุณาเลือก Stage",
+                    "invalid": "กรุณาเลือก Stage จากรายการที่กำหนด"
+                },
+                "entryDate": {
+                    "empty": "กรุณาเลือกวันที่เข้ารักษา"
+                },
+                "entryTime": {
+                    "empty": "กรุณาเลือกเวลาที่เข้ารักษา"
                 }
             }
         },

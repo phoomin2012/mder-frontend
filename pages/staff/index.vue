@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { Prompt } from '@/plugins/sweetalert2'
+import { Prompt, Toast } from '@/plugins/sweetalert2'
 
 export default {
   data () {
@@ -86,6 +86,7 @@ export default {
         if (value.data) {
           if (value.data.success) {
             this.$set(this, 'items', value.data.list)
+            Toast.fire(this.$t('popup.staff.success.remove'))
           }
         }
       })

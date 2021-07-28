@@ -16,7 +16,7 @@
         "nonRole": "--- Please select role for this account ---",
         "new": "New staff",
         "edit": "Edit",
-        "remove": "Remove",
+        "remove": "Delete",
         "save": "Save",
         "create": "Create account",
         "form": {
@@ -25,6 +25,50 @@
                 "edit": "Edit account {0}"
             }
         }
+    },
+    "patient": {
+        "hospitalNumber": "Hospital Number",
+        "bedNumber": "Bed Number",
+        "name": "Name",
+        "lastName": "Lastname",
+        "ventilator": "Use ventilator",
+        "triage": "Triage level",
+        "triages": {
+            "5": "5 - Non-Urgency",
+            "4": "4 - Less Urgency",
+            "3": "3 - Urgency",
+            "2": "2 - Emergency",
+            "1": "1 - Resuscitation"
+        },
+        "stage": "Stage",
+        "entryTime": "Entry time",
+        "exitTime": "Exit time",
+        "entryAndExit": "Entry/Exit time",
+        "timeInterval": "Time Interval",
+        "create": "Add patient into system",
+        "stages": {
+            "null": "--- Please select stage of patient ---",
+            "triage": "Triage",
+            "investigation": "Investigation",
+            "consultation": "Consultation",
+            "diagnosis": "Diagnosis",
+            "treatment": "Treatment",
+            "disposition": "Disposition",
+            "discharged": "Disposition - Discharged",
+            "admitted": "Disposition - Admitted",
+            "transferred": "Disposition - Transferred"
+        },
+        "information": "Patient Information",
+        "edit": "Edit information",
+        "remove": "Remove from system",
+        "cancelEdit": "Cancel",
+        "saveEdit": "Save information"
+    },
+    "dashboard": {
+        "staffCount": "Physician/Nurse",
+        "currentPatient": "Current patient | Current patients",
+        "patientToday": "Patient today",
+        "time": "Time"
     },
     "login": {
         "button": "Login"
@@ -39,6 +83,11 @@
     "table": {
         "actions": "Actions"
     },
+    "date": {
+        "today": "Today",
+        "yesterday": "Yesterday",
+        "dayPast": "{0} day ago | {0} days ago"
+    },
     "popup": {
         "close": "Close",
         "confirm": "Confirm",
@@ -51,11 +100,35 @@
             },
             "success": {
                 "create": {
-                    "title": "Create new account success",
+                    "title": "Added successful",
                     "icon": "success"
                 },
                 "edit": {
-                    "title": "Save account success",
+                    "title": "Update Successful",
+                    "icon": "success"
+                },
+                "remove": {
+                    "title": "Delete Successful”",
+                    "icon": "success"
+                }
+            }
+        },
+        "patient": {
+            "remove": {
+                "title": "Confirm remove patient {1} {2} ({0})",
+                "text": "This action can't undo"
+            },
+            "success": {
+                "create": {
+                    "title": "Added successful",
+                    "icon": "success"
+                },
+                "edit": {
+                    "title": "Update Successful",
+                    "icon": "success"
+                },
+                "remove": {
+                    "title": "Delete Successful”",
                     "icon": "success"
                 }
             }
@@ -70,6 +143,53 @@
                 "password": {
                     "empty": "Please enter password.",
                     "invalid": "Incorrect password or account isn't exist."
+                }
+            },
+            "staff": {
+                "username": {
+                    "empty": "Please enter useranme.",
+                    "exist": "This username already taken. Please use another username."
+                },
+                "password": {
+                    "empty": "Please enter password."
+                },
+                "name": {
+                    "empty": "Please enter name."
+                },
+                "lastName": {
+                    "empty": "Please enter last name."
+                },
+                "role": {
+                    "empty": "Please select the role.",
+                    "invalid": "Please select the role in the list."
+                }
+            },
+            "patient": {
+                "hospitalNumber": {
+                    "empty": "Please enter the hospital number."
+                },
+                "bedNumber": {
+                    "empty": "Please enter the bed number."
+                },
+                "name": {
+                    "empty": "Please enter patient's name."
+                },
+                "lastName": {
+                    "empty": "Please enter patient's last name."
+                },
+                "triage": {
+                    "empty": "Please select triage level.",
+                    "invalid": "Please select triage level 1,2,3,4 or 5."
+                },
+                "stage": {
+                    "empty": "Please select the stage.",
+                    "invalid": "Please select the stage in the list."
+                },
+                "entryDate": {
+                    "empty": "Please select entry date."
+                },
+                "entryTime": {
+                    "empty": "Please select entry time."
                 }
             }
         },

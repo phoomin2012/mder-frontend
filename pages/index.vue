@@ -22,6 +22,15 @@
         </b-button>
       </b-form>
     </b-card>
+
+    <div class="text-center mt-5">
+      <b-button variant="link" :disabled="$i18n.locale === 'th'" @click.prevent.stop="$i18n.setLocale('th')">
+        ไทย
+      </b-button>
+      <b-button variant="link" :disabled="$i18n.locale === 'en'" @click.prevent.stop="$i18n.setLocale('en')">
+        English
+      </b-button>
+    </div>
   </div>
 </template>
 
@@ -62,6 +71,7 @@ export default {
         })
         connectSocket(this.$auth)
       } catch (e) {
+        this.loading = false
         if (e.response) {
           if (e.response.data.error) {
             if (e.response.data.error.form) {
