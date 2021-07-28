@@ -32,7 +32,7 @@
         "name": "Name",
         "lastName": "Lastname",
         "ventilator": "Use ventilator",
-        "triage": "Triage",
+        "triage": "Triage level",
         "triages": {
             "5": "5 - Non-Urgency",
             "4": "4 - Less Urgency",
@@ -100,15 +100,15 @@
             },
             "success": {
                 "create": {
-                    "title": "Create new account success",
+                    "title": "Added successful",
                     "icon": "success"
                 },
                 "edit": {
-                    "title": "Save account success",
+                    "title": "Update Successful",
                     "icon": "success"
                 },
                 "remove": {
-                    "title": "Remove account success",
+                    "title": "Delete Successful”",
                     "icon": "success"
                 }
             }
@@ -120,15 +120,15 @@
             },
             "success": {
                 "create": {
-                    "title": "Add new patient success",
+                    "title": "Added successful",
                     "icon": "success"
                 },
                 "edit": {
-                    "title": "Save patient information success",
+                    "title": "Update Successful",
                     "icon": "success"
                 },
                 "remove": {
-                    "title": "Remove patient success",
+                    "title": "Delete Successful”",
                     "icon": "success"
                 }
             }
@@ -143,6 +143,53 @@
                 "password": {
                     "empty": "Please enter password.",
                     "invalid": "Incorrect password or account isn't exist."
+                }
+            },
+            "staff": {
+                "username": {
+                    "empty": "Please enter useranme.",
+                    "exist": "This username already taken. Please use another username."
+                },
+                "password": {
+                    "empty": "Please enter password."
+                },
+                "name": {
+                    "empty": "Please enter name."
+                },
+                "lastName": {
+                    "empty": "Please enter last name."
+                },
+                "role": {
+                    "empty": "Please select the role.",
+                    "invalid": "Please select the role in the list."
+                }
+            },
+            "patient": {
+                "hospitalNumber": {
+                    "empty": "Please enter the hospital number."
+                },
+                "bedNumber": {
+                    "empty": "Please enter the bed number."
+                },
+                "name": {
+                    "empty": "Please enter patient's name."
+                },
+                "lastName": {
+                    "empty": "Please enter patient's last name."
+                },
+                "triage": {
+                    "empty": "Please select triage level.",
+                    "invalid": "Please select triage level 1,2,3,4 or 5."
+                },
+                "stage": {
+                    "empty": "Please select the stage.",
+                    "invalid": "Please select the stage in the list."
+                },
+                "entryDate": {
+                    "empty": "Please select entry date."
+                },
+                "entryTime": {
+                    "empty": "Please select entry time."
                 }
             }
         },
