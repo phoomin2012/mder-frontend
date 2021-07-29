@@ -31,6 +31,7 @@
     </ul>
 
     <div>
+      <check-in-out />
       <ul>
         <li>
           <b-button-group class="w-100">
@@ -54,9 +55,11 @@
 </template>
 
 <script>
+import checkInOut from './checkInOut.vue'
 import { disconnectSocket } from '~/service/socket'
 
 export default {
+  components: { checkInOut },
   methods: {
     async logout () {
       await this.$auth.logout()

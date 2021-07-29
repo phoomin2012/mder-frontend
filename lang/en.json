@@ -88,6 +88,12 @@
         "yesterday": "Yesterday",
         "dayPast": "{0} day ago | {0} days ago"
     },
+    "check": {
+        "title": "Check In/Out",
+        "username": "Username",
+        "in": "In",
+        "out": "Out"
+    },
     "popup": {
         "close": "Close",
         "confirm": "Confirm",

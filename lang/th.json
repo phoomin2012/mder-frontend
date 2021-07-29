@@ -88,6 +88,12 @@
         "yesterday": "เมื่อวาน",
         "dayPast": "{0} วัน | {0} วัน"
     },
+    "check": {
+        "title": "Check In/Out",
+        "username": "Username",
+        "in": "เข้า",
+        "out": "ออก"
+    },
     "popup": {
         "close": "ปิด",
         "confirm": "ยืนยัน",
