@@ -4,11 +4,10 @@
 import Vue from 'vue'
 import Sweetalert from 'sweetalert2'
 
-let _Swal = Sweetalert.mixin()
-export let Swal = Sweetalert.mixin({
+export const Swal = Sweetalert.mixin({
 })
 
-export let Toast = Sweetalert.mixin({
+export const Toast = Sweetalert.mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,
@@ -20,36 +19,37 @@ export let Toast = Sweetalert.mixin({
   }
 })
 
-export let Prompt = Sweetalert.mixin({
-//   confirmButtonText: Vue.i18n.t('popup.confirm'),
+export const Prompt = Sweetalert.mixin({
   showConfirmButton: true,
   showCancelButton: true,
   showLoaderOnConfirm: true
 })
 
 export default function ({ app }) {
-  _Swal = Sweetalert.mixin({
+  Swal.update({
     confirmButtonText: app.i18n.t('popup.close'),
     cancelButtonText: app.i18n.t('popup.cancel'),
     denyButtonText: app.i18n.t('popup.deny')
   })
 
-  Swal = _Swal
-  Toast = _Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Sweetalert.stopTimer)
-      toast.addEventListener('mouseleave', Sweetalert.resumeTimer)
-    }
-  })
-  Prompt = _Swal.mixin({
+  Prompt.update({
     confirmButtonText: app.i18n.t('popup.confirm'),
-    showConfirmButton: true,
-    showCancelButton: true,
-    showLoaderOnConfirm: true
+    cancelButtonText: app.i18n.t('popup.cancel'),
+    denyButtonText: app.i18n.t('popup.deny')
   })
+
+  // Listen on language change
+  app.i18n.onLanguageSwitched = (oldLocale, newLocale) => {
+    Swal.update({
+      confirmButtonText: app.i18n.t('popup.close'),
+      cancelButtonText: app.i18n.t('popup.cancel'),
+      denyButtonText: app.i18n.t('popup.deny')
+    })
+
+    Prompt.update({
+      confirmButtonText: app.i18n.t('popup.confirm'),
+      cancelButtonText: app.i18n.t('popup.cancel'),
+      denyButtonText: app.i18n.t('popup.deny')
+    })
+  }
 }
