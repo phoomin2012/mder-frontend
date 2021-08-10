@@ -49,6 +49,10 @@
               <fa-icon icon="trash-alt" class="mr-2" />
               {{ $t('patient.remove') }}
             </b-button>
+            <b-button size="sm" variant="warning" @click="setCountdown">
+              <fa-icon icon="clock" class="mr-2" />
+              {{ $t('patient.setCountdown') }}
+            </b-button>
             <b-button size="sm" variant="warning" type="button" @click.prevent="openEdit">
               <fa-icon icon="edit" class="mr-2" />
               {{ $t('patient.edit') }}
@@ -242,6 +246,10 @@ export default {
     patientId: {
       type: String,
       default: null
+    },
+    setCountdown: {
+      type: Function,
+      default: () => {}
     }
   },
   data () {

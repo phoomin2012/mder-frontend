@@ -62,7 +62,8 @@
         "edit": "Edit information",
         "remove": "Remove from system",
         "cancelEdit": "Cancel",
-        "saveEdit": "Save information"
+        "saveEdit": "Save information",
+        "setCountdown": "Set countdown"
     },
     "dashboard": {
         "staffCount": "Physician/Nurse",
@@ -145,6 +146,14 @@
         },
         "checkOut": {
             "title": "Check Out success",
+            "icon": "success"
+        },
+        "countdownStart": {
+            "title": "Start countdown success",
+            "icon": "success"
+        },
+        "countdownStop": {
+            "title": "Reset countdown success",
             "icon": "success"
         }
     },
@@ -239,6 +248,12 @@
                     "icon": "warning"
                 }
             },
+            "countdown": {
+                "notExist": {
+                    "title": "Countdown never start",
+                    "icon": "error"
+                }
+            }
         }
     }
 }

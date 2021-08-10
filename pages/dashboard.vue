@@ -7,7 +7,9 @@
             <h3 class="text-right">
               {{ $t('dashboard.staffCount') }}
             </h3>
-            <span class="font-weight-bold">-/-</span>
+            <span class="font-weight-bold">
+              {{ currentPhysician }}/{{ currentNurse }}
+            </span>
           </b-card-body>
         </b-card>
       </b-col>
@@ -85,13 +87,23 @@
           </b-table>
         </b-card>
       </b-col>
+      <b-col>
+        <countdownBox @patient="openPatientPopup" />
+      </b-col>
     </b-row>
 
     <b-modal ref="modal-patient" hide-footer>
       <template #modal-title>
         <fa-icon icon="user-injured" class="mr-2" /> Patient Information
       </template>
-      <popup-patient v-if="selectedPatient" :patient-id="selectedPatient" @remove="$refs['modal-patient'].hide()" />
+      <popup-patient v-if="selectedPatient" :patient-id="selectedPatient" :set-countdown="openCountdown" @remove="$refs['modal-patient'].hide()" />
+    </b-modal>
+
+    <b-modal ref="modal-countdown" hide-footer>
+      <template #modal-title>
+        <fa-icon icon="clock" class="mr-2" /> Countdown
+      </template>
+      <countdown-form v-if="selectedPatient" :patient-id="selectedPatient" @close="$refs['modal-countdown'].hide()" />
     </b-modal>
   </div>
 </template>
@@ -102,10 +114,14 @@ import { enUS, th } from 'date-fns/locale'
 import { mapGetters } from 'vuex'
 import { PatientStageColor, PatientTriageColor, PatientStageNumber } from '@/service/patient'
 import PopupPatient from '~/components/patientInformation.vue'
+import CountdownBox from '~/components/countDownBox.vue'
+import CountdownForm from '~/components/countdownForm.vue'
 
 export default {
   components: {
-    PopupPatient
+    PopupPatient,
+    CountdownBox,
+    CountdownForm
   },
   data () {
     return {
@@ -131,7 +147,9 @@ export default {
       }
     },
     ...mapGetters({
-      patients: 'patient/all'
+      patients: 'patient/all',
+      currentPhysician: 'summary/currentPhysician',
+      currentNurse: 'summary/currentNurse'
     }),
     patientFiltered () {
       const patientList = [...this.patients]
@@ -234,8 +252,15 @@ export default {
       return PatientStageColor[number]
     },
     openPatientPopup (patient) {
-      this.$set(this, 'selectedPatient', patient._id)
+      if (typeof patient === 'string') {
+        this.$set(this, 'selectedPatient', patient)
+      } else {
+        this.$set(this, 'selectedPatient', patient._id)
+      }
       this.$refs['modal-patient'].show()
+    },
+    openCountdown () {
+      this.$refs['modal-countdown'].show()
     }
   }
 }

@@ -2,6 +2,10 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
+  server: {
+    port: 5555
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'mder-frontend',
@@ -26,6 +30,7 @@ export default {
   plugins: [
     '@/plugins/fontawesome.js',
     '@/plugins/sweetalert2.js',
+    '@/plugins/mask.js',
     '@/service/socket.js'
   ],
 

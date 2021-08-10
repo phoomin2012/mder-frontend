@@ -59,10 +59,11 @@
             "transferred": "Disposition - Transferred"
         },
         "information": "ข้อมูลผู้ป่วย",
-        "edit": "แก้ไขข้อมูลผู้ป่วย",
-        "remove": "ลบข้อมูลออกจากระบบ",
+        "edit": "แก้ไขข้อมูล",
+        "remove": "ลบข้อมูล",
         "cancelEdit": "ยกเลิก",
-        "saveEdit": "บันทึกข้อมูลผู้ป่วย"
+        "saveEdit": "บันทึกข้อมูลผู้ป่วย",
+        "setCountdown": "ตั้ง Countdown"
     },
     "dashboard": {
         "staffCount": "หมอ/พยาบาล",
@@ -145,6 +146,14 @@
         },
         "checkOut": {
             "title": "เช็คเอาว์สำเร็จ",
+            "icon": "success"
+        },
+        "countdownStart": {
+            "title": "เริ่มต้นจับเวลาแล้ว",
+            "icon": "success"
+        },
+        "countdownStop": {
+            "title": "หยุดการจับเวลาสำเร็จ",
             "icon": "success"
         }
     },
@@ -237,6 +246,12 @@
                 "noCheckIn": {
                     "title": "คุณยังไม่ได้เช็คอิน",
                     "icon": "warning"
+                }
+            },
+            "countdown": {
+                "notExist": {
+                    "title": "คุณยังไม่ได้เริ่มการจับเวลา",
+                    "icon": "error"
                 }
             }
         }

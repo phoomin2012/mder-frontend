@@ -62,4 +62,29 @@ export default function ({ app, i18n, store }) {
     store.commit('summary/setPhysician', physician)
     store.commit('summary/setNurse', nurse)
   })
+
+  socket.on('checkIn', function socketOnCheckIn ({ role }) {
+    console.log('[Socket] checkIn', role)
+    store.dispatch('summary/checkIn', role)
+  })
+
+  socket.on('checkOut', function socketOnCheckOut ({ role }) {
+    console.log('[Socket] checkOut', role)
+    store.dispatch('summary/checkOut', role)
+  })
+
+  socket.on('countdown.all', function socketOnCountdownAll (countings) {
+    console.log('[Socket] countdown.all', countings)
+    store.commit('countdown/all', countings)
+  })
+
+  socket.on('countdown.start', function socketOnCountdownStart (counting) {
+    console.log('[Socket] countdown.start', counting)
+    store.commit('countdown/start', counting)
+  })
+
+  socket.on('countdown.stop', function socketOnCountdownStart (counting) {
+    console.log('[Socket] countdown.stop', counting)
+    store.commit('countdown/stop', counting)
+  })
 }
