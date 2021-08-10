@@ -138,6 +138,14 @@
                     "icon": "success"
                 }
             }
+        },
+        "checkIn": {
+            "title": "เช็คอินสำเร็จ",
+            "icon": "success"
+        },
+        "checkOut": {
+            "title": "เช็คเอาว์สำเร็จ",
+            "icon": "success"
         }
     },
     "error": {
@@ -204,6 +212,32 @@
                 "title": "ไม่สามารถดำเนินการได้",
                 "text": "โปรดลองอีกครั้งภายหลัง",
                 "icon": "error"
+            },
+            "patient": {
+                "notExist": {
+                    "title": "ไม่พบผู้ป่วยในระบบ",
+                    "icon": "error"
+                }
+            },
+            "checkIn": {
+                "noUser": {
+                    "title": "ไม่พบ Username ในระบบ",
+                    "icon": "error"
+                },
+                "already": {
+                    "title": "คุณได้เช็คอินแล้ว",
+                    "icon": "warning"
+                }
+            },
+            "checkOut": {
+                "noUser": {
+                    "title": "ไม่พบ Username ในระบบ",
+                    "icon": "error"
+                },
+                "noCheckIn": {
+                    "title": "คุณยังไม่ได้เช็คอิน",
+                    "icon": "warning"
+                }
             }
         }
     }

@@ -138,6 +138,14 @@
                     "icon": "success"
                 }
             }
+        },
+        "checkIn": {
+            "title": "Check In success",
+            "icon": "success"
+        },
+        "checkOut": {
+            "title": "Check Out success",
+            "icon": "success"
         }
     },
     "error": {
@@ -204,7 +212,33 @@
                 "title": "Can't complete request",
                 "text": "Please try again later.",
                 "icon": "error"
-            }
+            },
+            "patient": {
+                "notExist": {
+                    "title": "Patient doesn't exist",
+                    "icon": "error"
+                }
+            },
+            "checkIn": {
+                "noUser": {
+                    "title": "Username doesn't exist",
+                    "icon": "error"
+                },
+                "already": {
+                    "title": "You're already check in",
+                    "icon": "warning"
+                }
+            },
+            "checkOut": {
+                "noUser": {
+                    "title": "Username doesn't exist",
+                    "icon": "error"
+                },
+                "noCheckIn": {
+                    "title": "You didn't check in yet",
+                    "icon": "warning"
+                }
+            },
         }
     }
 }

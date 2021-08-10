@@ -55,4 +55,11 @@ export default function ({ app, i18n, store }) {
     console.log('[Socket] patient.all', patients)
     store.commit('patient/all', patients)
   })
+
+  socket.on('summary.checkIn', function socketOnSummaryCheckIn (data) {
+    console.log('[Socket] summary.checkIn', data)
+    const { physician, nurse } = data
+    store.commit('summary/setPhysician', physician)
+    store.commit('summary/setNurse', nurse)
+  })
 }

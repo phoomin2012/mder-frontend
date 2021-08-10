@@ -14,6 +14,7 @@ export const getters = {
 }
 
 export const mutations = {
+  // Feature 5: Check In/Check Out
   increasePhysician (state) {
     state.currentPhysician += 1
   },
@@ -33,7 +34,7 @@ export const mutations = {
   setNurse (state, amount) {
     state.currentNurse = amount
   },
-
+  // Feature 3: Patient Management
   increasePatient (state) {
     state.currentPatient += 1
   },
@@ -42,5 +43,23 @@ export const mutations = {
   },
   setPatient (state, amount) {
     state.currentPatient = amount
+  }
+}
+
+export const actions = {
+  // Feature 5: Check In/Check Out
+  checkIn ({ commit }, role) {
+    if (role === 'physician') {
+      commit('increasePhysician')
+    } else if (role === 'nurse') {
+      commit('increaseNurse')
+    }
+  },
+  checkOut ({ commit }, role) {
+    if (role === 'physician') {
+      commit('decreasePhysician')
+    } else if (role === 'nurse') {
+      commit('decreaseNurse')
+    }
   }
 }
