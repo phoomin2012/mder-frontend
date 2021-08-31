@@ -123,6 +123,9 @@ export default {
     CountdownBox,
     CountdownForm
   },
+
+  middleware: 'auth',
+
   data () {
     return {
       now: new Date(),
@@ -130,6 +133,7 @@ export default {
       selectedPatient: null
     }
   },
+
   computed: {
     timeFormatted () {
       return format(this.now, 'HH:mm:ss', { locale: this.dateLocale })
@@ -198,12 +202,15 @@ export default {
       ]
     }
   },
+
   created () {
     this.timer = setInterval(this.updateTime, 1000)
   },
+
   beforeDestroy () {
     clearInterval(this.timer)
   },
+
   methods: {
     updateTime () {
       this.$set(this, 'now', new Date())

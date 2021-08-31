@@ -33,7 +33,7 @@ div#__nuxt {
   & > div {
     // Sidebar
     &.sidebar {
-      min-width: 270px;
+      min-width: 315px;
       background: #4F4F4F;
       padding: 2.5rem;
 

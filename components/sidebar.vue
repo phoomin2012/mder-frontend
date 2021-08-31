@@ -22,7 +22,7 @@
         </nuxt-link>
       </li>
 
-      <li v-if="false">
+      <li>
         <nuxt-link to="/history">
           <fa-icon icon="chart-area" size="lg" />
           {{ $t('sidebar.history') }}
