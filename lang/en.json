@@ -11,7 +11,8 @@
         "role": "Role",
         "roles": {
             "physician": "Physician",
-            "nurse": "Nurse"
+            "nurse": "Nurse",
+            "patient": "Patient"
         },
         "nonRole": "--- Please select role for this account ---",
         "new": "New staff",
@@ -94,6 +95,13 @@
         "username": "Username",
         "in": "In",
         "out": "Out"
+    },
+    "history": {
+        "title": "History report",
+        "amount": {
+            "people": "People"
+        },
+        "time": "Time"
     },
     "popup": {
         "close": "Close",

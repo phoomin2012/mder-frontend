@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between align-items-center">
       <h1>
         <fa-icon icon="chart-area" />
-        History report
+        {{ $t('history.title') }}
       </h1>
       <div>
         <b-button id="popover-choose-period" class="ml-4" variant="outline-secondary">
@@ -16,17 +16,19 @@
     <b-popover
       target="popover-choose-period"
       placement="bottom"
-      triggers="click blur"
+      triggers="click"
     >
       <b-row>
-        <b-col>
+        <b-col cols="6">
           <b-form-group label="Start">
             <b-input />
+            <b-calendar locale="th-TH" />
           </b-form-group>
         </b-col>
-        <b-col>
+        <b-col cols="6">
           <b-form-group label="End">
             <b-input />
+            <b-calendar locale="th-TH" />
           </b-form-group>
         </b-col>
       </b-row>
@@ -51,7 +53,7 @@
         <b-overlay :show="loading">
           <div class="card card-body mb-3">
             Chart 3: amount of staff and patient
-            <div id="chart-3" style="box-sizing: border-box;" />
+            <canvas id="chart-3" style="box-sizing: border-box;" />
           </div>
         </b-overlay>
       </b-col>
@@ -80,9 +82,10 @@
 </template>
 
 <script>
-import * as d3 from 'd3'
 // eslint-disable-next-line no-unused-vars
 import { format } from 'date-fns'
+import Chart from 'chart.js/auto'
+import 'chartjs-adapter-date-fns'
 import { Swal } from '~/plugins/sweetalert2'
 
 export default {
@@ -142,46 +145,90 @@ export default {
       }
     },
     rednerGraph3 () {
+      const data = {
+        labels: [],
+        datasets: [
+          {
+            label: this.$t('staff.roles.physician'),
+            backgroundColor: '#1786b9',
+            borderColor: '#1786b9',
+            data: [],
+            pointRadius: 0,
+            borderWidth: 1
+          },
+          {
+            label: this.$t('staff.roles.nurse'),
+            backgroundColor: '#ff66c4',
+            borderColor: '#ff66c4',
+            data: [],
+            pointRadius: 0,
+            borderWidth: 1
+          },
+          {
+            label: this.$t('staff.roles.patient'),
+            backgroundColor: '#38b6ff',
+            borderColor: '#38b6ff',
+            data: [],
+            pointRadius: 0,
+            borderWidth: 1
+          }
+        ]
+      }
+
+      for (const e of this.history.chart3) {
+        data.labels.push(new Date(e.time))
+
+        data.datasets[0].data.push(e.physician)
+        data.datasets[1].data.push(e.nurse)
+        data.datasets[2].data.push(e.patient)
+      }
+
       if (typeof this.charts[3] === 'undefined') {
-        this.charts[3] = d3.select('#chart-3').append('svg')
+        const ctx = document.getElementById('chart-3')
+        this.charts[3] = new Chart(ctx, {
+          type: 'line',
+          data,
+          options: {
+            locale: 'th-TH',
+            interaction: {
+              intersect: false,
+              mode: 'index'
+            },
+            scales: {
+              x: {
+                grid: {
+                  display: false
+                },
+                type: 'timeseries',
+                time: {
+                  unit: 'second',
+                  tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
+                  displayFormats: {
+                    second: 'HH:mm:ss'
+                  }
+                },
+                title: {
+                  display: true,
+                  text: this.$t('history.time')
+                }
+              },
+              y: {
+                grid: {
+                  display: false
+                },
+                title: {
+                  display: true,
+                  text: this.$t('history.amount.people')
+                },
+                suggestedMax: 10
+              }
+            }
+          }
+        })
       }
 
-      const margin = { top: 10, right: 0, bottom: 30, left: 30 }
-
-      const svg = this.charts[3]
-      const data = this.history.chart3
-
-      const width = svg.node().parentNode.clientWidth - margin.left - margin.right
-      const height = 400 - margin.top - margin.bottom
-
-      if (svg.node().children.length > 0) {
-        for (const child of svg.node().children) {
-          svg.node().removeChild(child)
-        }
-      }
-
-      svg.attr('width', width + margin.left + margin.right)
-      svg.attr('height', height + margin.top + margin.bottom)
-      const g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-
-      // Add X axis
-      const x = d3.scaleTime().domain(d3.extent(data, (d) => { return new Date(d.time) })).range([0, width])
-      g.append('g').attr('transform', 'translate(0,' + height + ')').call(d3.axisBottom(x))
-
-      // Add Y axis
-      const y = d3.scaleLinear().domain([0, d3.max(data, (d) => { return Math.max(d.physician, d.nurse, d.patient) })]).range([height, 0])
-      g.append('g').call(d3.axisLeft(y))
-
-      // Add the line
-      const path = g.append('path')
-      path.datum(data)
-        .attr('fill', 'none')
-        .attr('stroke', 'steelblue')
-        .attr('stroke-width', 1.5)
-        .attr('d', d3.line()
-          .x((d) => { return x(new Date(d.time)) })
-          .y((d) => { return y(d.physician) })
-        )
+      this.charts[3].data = data
+      this.charts[3].update()
     }
   }
 }

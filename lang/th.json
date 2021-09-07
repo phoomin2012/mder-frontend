@@ -11,7 +11,8 @@
         "role": "ตำแหน่ง",
         "roles": {
             "physician": "หมอ",
-            "nurse": "พยาบาล"
+            "nurse": "พยาบาล",
+            "patient": "ผู้ป่วย"
         },
         "nonRole": "--- โปรดเลือกตำแหน่งของบัญชี ---",
         "new": "เพิ่มบัญชี Staff",
@@ -94,6 +95,13 @@
         "username": "Username",
         "in": "เข้า",
         "out": "ออก"
+    },
+    "history": {
+        "title": "รายงาน",
+        "amount": {
+            "people": "จำนวนคน"
+        },
+        "time": "เวลา"
     },
     "popup": {
         "close": "ปิด",
