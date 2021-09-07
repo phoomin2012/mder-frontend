@@ -6,39 +6,19 @@
         {{ $t('history.title') }}
       </h1>
       <div>
-        <b-button id="popover-choose-period" class="ml-4" variant="outline-secondary">
-          <fa-icon icon="clock" />
-          Choose period
-        </b-button>
+        <period-button
+          :start.sync="startPeriod"
+          :end.sync="endPeriod"
+        />
       </div>
     </div>
-
-    <b-popover
-      target="popover-choose-period"
-      placement="bottom"
-      triggers="click"
-    >
-      <b-row>
-        <b-col cols="6">
-          <b-form-group label="Start">
-            <b-input />
-            <b-calendar locale="th-TH" />
-          </b-form-group>
-        </b-col>
-        <b-col cols="6">
-          <b-form-group label="End">
-            <b-input />
-            <b-calendar locale="th-TH" />
-          </b-form-group>
-        </b-col>
-      </b-row>
-    </b-popover>
 
     <b-row>
       <b-col md="6">
         <b-overlay :show="loading">
           <div class="card card-body mb-3">
             Chart 1: patient triage level
+            <canvas id="chart-1" style="box-sizing: border-box;" />
           </div>
         </b-overlay>
       </b-col>
@@ -89,9 +69,15 @@
 import { format } from 'date-fns'
 import Chart from 'chart.js/auto'
 import 'chartjs-adapter-date-fns'
+import { PatientTriageColor, PatientStageColorHex, PatientStageNumber } from '@/service/patient'
 import { Swal } from '~/plugins/sweetalert2'
+import PeriodButton from '~/components/periodButton.vue'
 
 export default {
+  components: {
+    PeriodButton
+  },
+
   middleware: 'auth',
 
   data () {
