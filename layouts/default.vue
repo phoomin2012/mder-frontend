@@ -15,9 +15,12 @@ export default {
 </script>
 
 <style lang="scss">
-
+html, body {
+  width: 100%;
+  height: 100%;
+}
 div#__nuxt {
-  position: absolute;
+  // position: absolute;
   width: 100%;
   height: 100%;
 
