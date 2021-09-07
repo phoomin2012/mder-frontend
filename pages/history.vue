@@ -46,6 +46,7 @@
         <b-overlay :show="loading">
           <div class="card card-body mb-3">
             Chart 2: average time interval
+            <canvas id="chart-2" style="box-sizing: border-box;" />
           </div>
         </b-overlay>
       </b-col>
@@ -61,6 +62,7 @@
         <b-overlay :show="loading">
           <div class="card card-body mb-3">
             Chart 4: average length of stay
+            <canvas id="chart-4" style="box-sizing: border-box;" />
           </div>
         </b-overlay>
       </b-col>
@@ -68,6 +70,7 @@
         <b-overlay :show="loading">
           <div class="card card-body">
             Chart 5: Overcrowding score
+            <canvas id="chart-5" style="box-sizing: border-box;" />
           </div>
         </b-overlay>
       </b-col>
@@ -98,7 +101,11 @@ export default {
       startPeriod: null,
       endPeriod: null,
       history: {
-        chart3: []
+        chart1: [],
+        chart2: [],
+        chart3: [],
+        chart4: [],
+        chart5: []
       },
       timer: null,
       charts: {}
@@ -106,36 +113,52 @@ export default {
   },
 
   watch: {
-
+    '$i18n.locale' () {
+      this.renderChart1()
+      this.renderChart2()
+      this.renderChart3()
+      this.renderChart4()
+      this.renderChart5()
+    },
+    startPeriod () {
+      this.fetchGraph()
+    }
   },
 
   created () {
-    this.fetchGraph()
   },
 
   mounted () {
-    this.rednerGraph3()
+    this.renderChart1()
+    this.renderChart2()
+    this.renderChart3()
+    this.renderChart4()
+    this.renderChart5()
   },
 
   methods: {
-    loadPeriodFromStorage () {
-
-    },
-    savePeriodToStorage () {
-
-    },
     async fetchGraph () {
       try {
         this.loading = true
-        const { data } = await this.$axios.get('/api/history')
-        this.$set(this, 'history', data)
+        const { data } = await this.$axios.get('/api/history', {
+          params: {
+            start: this.startPeriod,
+            end: this.endPeriod
+          }
+        })
 
         for (const chart in data) {
+          if (chart === 'finishIn') { continue }
           // eslint-disable-next-line no-console
           console.log(chart, data[chart].length)
+          this.$set(this.history, chart, data[chart])
         }
 
-        this.rednerGraph3()
+        this.renderChart1()
+        this.renderChart2()
+        this.renderChart3()
+        this.renderChart4()
+        this.renderChart5()
       } catch (err) {
         // eslint-disable-next-line no-console
         console.error(err)
@@ -144,7 +167,156 @@ export default {
         this.loading = false
       }
     },
-    rednerGraph3 () {
+    renderChart1 () {
+      const data = {
+        labels: [],
+        datasets: []
+      }
+      for (const i in PatientTriageColor) {
+        data.datasets.push({
+          label: this.$t('history.level', [i]),
+          backgroundColor: PatientTriageColor[i],
+          borderColor: PatientTriageColor[i],
+          data: [],
+          pointRadius: 0,
+          borderWidth: 1
+        })
+      }
+
+      for (const e of this.history.chart1) {
+        data.labels.push(new Date(e.time))
+
+        for (const i in PatientTriageColor) {
+          data.datasets[i - 1].data.push(e.triages[i])
+        }
+      }
+
+      if (typeof this.charts[1] === 'undefined') {
+        const ctx = document.getElementById('chart-1')
+        this.charts[1] = new Chart(ctx, {
+          type: 'line',
+          data,
+          options: {
+            locale: this.$i18n.locale,
+            interaction: {
+              intersect: false,
+              mode: 'index'
+            },
+            scales: {
+              x: {
+                grid: {
+                  display: false
+                },
+                type: 'timeseries',
+                time: {
+                  unit: 'second',
+                  tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
+                  displayFormats: {
+                    second: 'HH:mm:ss'
+                  }
+                },
+                title: {
+                  display: true,
+                  text: ''
+                }
+              },
+              y: {
+                grid: {
+                  display: false
+                },
+                title: {
+                  display: true,
+                  text: ''
+                },
+                suggestedMax: 10
+              }
+            }
+          }
+        })
+      }
+
+      this.charts[1].options.locale = this.$i18n.locale
+      this.charts[1].options.scales.x.title.text = this.$t('history.time')
+      this.charts[1].options.scales.y.title.text = this.$t('history.amount.people')
+      this.charts[1].data = data
+      this.charts[1].update()
+    },
+    renderChart2 () {
+      const data = {
+        labels: [],
+        datasets: []
+      }
+      for (const i in PatientStageColorHex) {
+        data.datasets.push({
+          label: this.$t(`patient.stages.${PatientStageNumber[i]}`),
+          backgroundColor: PatientStageColorHex[i],
+          borderColor: PatientStageColorHex[i],
+          data: [],
+          pointRadius: 0,
+          borderWidth: 1
+        })
+      }
+
+      for (const e of this.history.chart2) {
+        data.labels.push(new Date(e.time))
+
+        const PatientStageColorHexKey = Object.keys(PatientStageColorHex)
+        for (const i in PatientStageColorHexKey) {
+          data.datasets[i].data.push(e.stages[PatientStageColorHexKey[i]])
+        }
+      }
+
+      if (typeof this.charts[2] === 'undefined') {
+        const ctx = document.getElementById('chart-2')
+        this.charts[2] = new Chart(ctx, {
+          type: 'line',
+          data,
+          options: {
+            locale: this.$i18n.locale,
+            interaction: {
+              intersect: false,
+              mode: 'index'
+            },
+            scales: {
+              x: {
+                grid: {
+                  display: false
+                },
+                type: 'timeseries',
+                time: {
+                  unit: 'second',
+                  tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
+                  displayFormats: {
+                    second: 'HH:mm:ss'
+                  }
+                },
+                title: {
+                  display: true,
+                  text: ''
+                }
+              },
+              y: {
+                grid: {
+                  display: false
+                },
+                title: {
+                  display: true,
+                  text: ''
+                },
+                suggestedMax: 10
+              }
+            }
+          }
+        })
+      }
+
+      this.charts[2].options.locale = this.$i18n.locale
+      this.charts[2].options.scales.x.title.text = this.$t('history.time')
+      this.charts[2].options.scales.y.title.text = this.$t('history.duration')
+      this.charts[2].data = data
+      this.charts[2].update()
+    },
+    renderChart3 () {
       const data = {
         labels: [],
         datasets: [
@@ -189,7 +361,7 @@ export default {
           type: 'line',
           data,
           options: {
-            locale: 'th-TH',
+            locale: this.$i18n.locale,
             interaction: {
               intersect: false,
               mode: 'index'
@@ -209,7 +381,7 @@ export default {
                 },
                 title: {
                   display: true,
-                  text: this.$t('history.time')
+                  text: ''
                 }
               },
               y: {
@@ -218,7 +390,7 @@ export default {
                 },
                 title: {
                   display: true,
-                  text: this.$t('history.amount.people')
+                  text: ''
                 },
                 suggestedMax: 10
               }
@@ -227,8 +399,84 @@ export default {
         })
       }
 
+      this.charts[3].options.locale = this.$i18n.locale
+      this.charts[3].options.scales.x.title.text = this.$t('history.time')
+      this.charts[3].options.scales.y.title.text = this.$t('history.amount.people')
       this.charts[3].data = data
       this.charts[3].update()
+    },
+    renderChart4 () {
+      const data = {
+        labels: [],
+        datasets: [
+          {
+            label: this.$t('history.duration'),
+            backgroundColor: '',
+            borderColor: '',
+            data: [],
+            pointRadius: 0,
+            borderWidth: 1
+          }
+        ]
+      }
+
+      for (const e of this.history.chart4) {
+        data.labels.push(new Date(e.time))
+        data.datasets[0].data.push(e.all)
+      }
+
+      if (typeof this.charts[4] === 'undefined') {
+        const ctx = document.getElementById('chart-4')
+        this.charts[4] = new Chart(ctx, {
+          type: 'line',
+          data,
+          options: {
+            locale: this.$i18n.locale,
+            interaction: {
+              intersect: false,
+              mode: 'index'
+            },
+            scales: {
+              x: {
+                grid: {
+                  display: false
+                },
+                type: 'timeseries',
+                time: {
+                  unit: 'second',
+                  tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
+                  displayFormats: {
+                    second: 'HH:mm:ss'
+                  }
+                },
+                title: {
+                  display: true,
+                  text: ''
+                }
+              },
+              y: {
+                grid: {
+                  display: false
+                },
+                title: {
+                  display: true,
+                  text: ''
+                },
+                suggestedMax: 10
+              }
+            }
+          }
+        })
+      }
+
+      this.charts[4].options.locale = this.$i18n.locale
+      this.charts[4].options.scales.x.title.text = this.$t('history.time')
+      this.charts[4].options.scales.y.title.text = this.$t('history.duration')
+      this.charts[4].data = data
+      this.charts[4].update()
+    },
+    renderChart5 () {
+
     }
   }
 }

@@ -15,15 +15,7 @@ export default {
 </script>
 
 <style lang="scss">
-html, body {
-  width: 100%;
-  height: 100%;
-}
 div#__nuxt {
-  // position: absolute;
-  width: 100%;
-  height: 100%;
-
   div#__layout {
     height: 100% !important;
   }
@@ -37,7 +29,7 @@ div#__nuxt {
     // Sidebar
     &.sidebar {
       min-width: 315px;
-      background: #4F4F4F;
+      background: #4f4f4f;
       padding: 2.5rem;
 
       ul {
@@ -46,8 +38,8 @@ div#__nuxt {
         margin: 0;
 
         li {
-            padding-top: 10px;
-            padding-bottom: 10px;
+          padding-top: 10px;
+          padding-bottom: 10px;
 
           a {
             color: #fff;
@@ -55,7 +47,7 @@ div#__nuxt {
             text-decoration: none;
 
             &:hover {
-              color: #d3d3d3
+              color: #d3d3d3;
             }
             svg {
               margin-right: 10px;

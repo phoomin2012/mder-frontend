@@ -101,7 +101,18 @@
         "amount": {
             "people": "จำนวนคน"
         },
-        "time": "เวลา"
+        "overcrowd": {
+            "nedocs": "NEDOCS",
+            "edwins": "EDWINS"
+        },
+        "time": "เวลา",
+        "duration": "ระยะเวลา",
+        "level": "ระดับ {0}",
+        "choosePeriod": "เลือกช่วงเวลา",
+        "cancel": "ยกเลิก",
+        "submit": "เลือกช่วงเวลา",
+        "start": "เริ่มตั้งแต่",
+        "end": "จนถึง"
     },
     "popup": {
         "close": "ปิด",

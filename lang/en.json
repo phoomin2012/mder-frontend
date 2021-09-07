@@ -101,7 +101,18 @@
         "amount": {
             "people": "People"
         },
-        "time": "Time"
+        "overcrowd": {
+            "nedocs": "NEDOCS",
+            "edwins": "EDWINS"
+        },
+        "time": "Time",
+        "duration": "Duration",
+        "level": "Level {0}",
+        "choosePeriod": "Choose period",
+        "cancel": "Cancel",
+        "submit": "Choose",
+        "start": "Since",
+        "end": "Until"
     },
     "popup": {
         "close": "Close",

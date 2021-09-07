@@ -22,6 +22,18 @@ export const PatientStageColor = {
   63: 'info'
 }
 
+export const PatientStageColorHex = {
+  1: '#6c757d',
+  2: '#dc3545',
+  3: '#212529',
+  4: '#ffc107',
+  5: '#28a745',
+  60: '#17a2b8',
+  61: '#17a2b8',
+  62: '#17a2b8',
+  63: '#17a2b8'
+}
+
 export const PatientTriageColor = {
   1: 'blue',
   2: 'red',
