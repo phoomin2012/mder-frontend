@@ -1,6 +1,30 @@
 <template>
   <div>
-    <b-button id="button-choose-period" class="ml-4" variant="outline-secondary" @click="showPopover">
+    <b-button v-if="refreshRate === null" @click="$emit('fetch')">
+      <fa-icon icon="sync" />
+    </b-button>
+
+    <b-dropdown>
+      <template #button-content>
+        <span v-if="refreshRate === null">
+          <fa-icon icon="pause" />
+          {{ $t('history.refresh.pause') }}
+        </span>
+        <span v-else>
+          <fa-icon icon="sync" />
+          {{ $tc('history.refresh.second', refreshRate) }}
+        </span>
+      </template>
+
+      <b-dropdown-header>
+        {{ $t('history.refresh.title') }}
+      </b-dropdown-header>
+      <b-dropdown-item-button v-for="(v, i) in [null, 5, 10, 15, 30, 60]" :key="i" @click="changeRefreshRate(v)">
+        {{ v === null ? $t('history.refresh.pause') : $tc('history.refresh.second', v) }}
+      </b-dropdown-item-button>
+    </b-dropdown>
+
+    <b-button id="button-choose-period" variant="outline-secondary" @click="showPopover">
       <fa-icon icon="clock" />
       <span v-if="modePeriod === 'past'">
         {{ $tc(`history.past.${pastPeriod.unit}`, pastPeriod.amount) }}
@@ -125,13 +149,15 @@ export default {
 
   data () {
     return {
+      refreshRate: null,
       showMode: this.mode,
       modePeriod: this.mode,
       pastPeriod: this.past,
       startDate: null,
       startTime: { hour: 0, minute: 0 },
       endDate: null,
-      endTime: { hour: 0, minute: 0 }
+      endTime: { hour: 0, minute: 0 },
+      timer: null
     }
   },
 
@@ -201,6 +227,18 @@ export default {
   created () {
     this.loadPeriodFromStorage()
     this.$emit('loaded')
+
+    if (this.refreshRate) {
+      setInterval(() => {
+        this.$emit('fetch')
+      }, this.refreshRate * 1000)
+    }
+  },
+
+  beforeDestroy () {
+    if (this.timer) {
+      clearInterval(this.timer)
+    }
   },
 
   methods: {
@@ -240,6 +278,8 @@ export default {
           this.modePeriod = data.mode
           this.showMode = data.mode
         }
+
+        this.refreshRate = data.refreshRate || null
         this.pastPeriod = data.pastPeriod
         this.startDate = data.startDate
         this.startTime = data.startTime
@@ -255,6 +295,7 @@ export default {
     savePeriodToStorage () {
       window.localStorage.setItem('history-report-period', JSON.stringify({
         mode: this.modePeriod,
+        refreshRate: this.refreshRate,
         pastPeriod: this.pastPeriod,
         startDate: this.startDate,
         startTime: this.startTime,
@@ -294,6 +335,21 @@ export default {
       })
 
       this.closePopover()
+    },
+    changeRefreshRate (rate) {
+      if (this.timer) {
+        clearInterval(this.timer)
+        this.timer = null
+      }
+
+      this.refreshRate = rate
+      this.savePeriodToStorage()
+
+      if (rate !== null) {
+        setInterval(() => {
+          this.$emit('fetch')
+        }, rate * 1000)
+      }
     }
   }
 }

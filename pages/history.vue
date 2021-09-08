@@ -12,6 +12,7 @@
           :start.sync="startPeriod"
           :end.sync="endPeriod"
           @change="changePeriod"
+          @fetch="fetchGraph"
           @loaded="fetchGraph"
         />
       </div>
@@ -59,12 +60,6 @@
         </b-overlay>
       </b-col>
     </b-row>
-
-    <div class="fixed-bottom p-3 text-right">
-      <b-button variant="outline-success" @click="fetchGraph">
-        Fetch now
-      </b-button>
-    </div>
   </div>
 </template>
 

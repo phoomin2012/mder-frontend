@@ -111,12 +111,17 @@
             "day": "Past {n} day | Past {n} days",
             "week": "Past {n} week | Past {n} weeks"
         },
+        "refresh": {
+            "title": "Refresh",
+            "pause": "Pause",
+            "second": "{n} second | {n} seconds"
+        },
         "time": "Time",
         "duration": "Duration",
         "level": "Level {0}",
         "choosePeriod": "Choose period",
         "customPeriod": "Custom period",
-        "pastPeriod": "",
+        "pastPeriod": "Basic period",
         "cancel": "Cancel",
         "submit": "Choose",
         "start": "Since",
