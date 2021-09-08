@@ -228,11 +228,7 @@ export default {
     this.loadPeriodFromStorage()
     this.$emit('loaded')
 
-    if (this.refreshRate) {
-      setInterval(() => {
-        this.$emit('fetch')
-      }, this.refreshRate * 1000)
-    }
+    this.startRefreshTask()
   },
 
   beforeDestroy () {
@@ -313,6 +309,7 @@ export default {
       this.modePeriod = 'past'
       this.pastPeriod = v
       this.savePeriodToStorage()
+      this.startRefreshTask()
 
       this.$emit('update:mode', 'past')
       this.$emit('update:past', this.pastPeriod)
@@ -324,6 +321,7 @@ export default {
     submitCustom () {
       this.modePeriod = 'custom'
       this.savePeriodToStorage()
+      this.startRefreshTask()
 
       this.$emit('update:mode', 'custom')
       this.$emit('update:start', this.startDateTime)
@@ -336,20 +334,21 @@ export default {
 
       this.closePopover()
     },
-    changeRefreshRate (rate) {
+    startRefreshTask () {
       if (this.timer) {
         clearInterval(this.timer)
         this.timer = null
       }
 
+      this.timer = setInterval(() => {
+        this.$emit('fetch')
+      }, this.refreshRate * 1000)
+    },
+    changeRefreshRate (rate) {
       this.refreshRate = rate
       this.savePeriodToStorage()
 
-      if (rate !== null) {
-        setInterval(() => {
-          this.$emit('fetch')
-        }, rate * 1000)
-      }
+      this.startRefreshTask()
     }
   }
 }
