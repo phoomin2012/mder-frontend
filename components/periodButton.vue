@@ -1,8 +1,16 @@
 <template>
   <div>
-    <b-button id="button-choose-period" class="ml-4" variant="outline-secondary">
+    <b-button id="button-choose-period" class="ml-4" variant="outline-secondary" @click="showPopover">
       <fa-icon icon="clock" />
-      {{ $t('history.choosePeriod') }}
+      <span v-if="modePeriod === 'past'">
+        {{ $tc(`history.past.${pastPeriod.unit}`, pastPeriod.amount) }}
+      </span>
+      <span v-else-if="modePeriod === 'custom'">
+        {{ formatDateTime(startDateTime) }} - {{ formatDateTime(endDateTime) }}
+      </span>
+      <span v-else>
+        {{ $t('history.choosePeriod') }}
+      </span>
     </b-button>
 
     <b-popover
@@ -12,55 +20,79 @@
       triggers="click"
       custom-class="popover-period"
     >
-      <div class="d-flex">
-        <div label="Start">
-          <div class="mt-1 mb-2">
-            {{ $t('history.start') }}
-          </div>
-          <div class="d-flex">
-            <div>
-              <div class="date-output form-control form-control-sm text-center">
-                {{ formatDateTime(startDateTime) }}
-              </div>
-              <b-calendar v-model="startDate" :locale="$i18n.locale" :date-info-fn="dateClass" :max="endDate" hide-header />
+      <div v-if="showMode === 'custom'" class="custom-period">
+        <div class="d-flex">
+          <div label="Start">
+            <div class="mt-1 mb-2">
+              {{ $t('history.start') }}
             </div>
-            <div class="select-time ml-2">
-              <select v-model="startTime" class="custom-select" size="4">
-                <option v-for="(time, i) in timesOptions" :key="i" :value="time" :disabled="timeDisable(endDate, startDate, endTime, time) <= 0">
-                  {{ (10 > time.hour ? `0${time.hour}` : time.hour) }}:{{ (10 > time.minute ? `0${time.minute}` : time.minute) }}
-                </option>
-              </select>
+            <div class="d-flex">
+              <div>
+                <div class="date-output form-control form-control-sm text-center">
+                  {{ formatDateTime(startDateTime) }}
+                </div>
+                <b-calendar v-model="startDate" :locale="$i18n.locale" :date-info-fn="dateClass" :max="endDate" hide-header />
+              </div>
+              <div class="select-time ml-2">
+                <select v-model="startTime" class="custom-select" size="4">
+                  <option v-for="(time, i) in timesOptions" :key="i" :value="time" :disabled="timeDisable(endDate, startDate, endTime, time) <= 0">
+                    {{ (10 > time.hour ? `0${time.hour}` : time.hour) }}:{{ (10 > time.minute ? `0${time.minute}` : time.minute) }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="ml-2 border-left pl-2">
+            <div class="mt-1 mb-2">
+              {{ $t('history.end') }}
+            </div>
+            <div class="d-flex">
+              <div>
+                <div class="date-output form-control form-control-sm text-center">
+                  {{ formatDateTime(endDateTime) }}
+                </div>
+                <b-calendar v-model="endDate" :locale="$i18n.locale" :date-info-fn="dateClass" :min="startDate" hide-header />
+              </div>
+              <div class="select-time ml-2">
+                <select v-model="endTime" class="custom-select" size="4">
+                  <option v-for="(time, i) in timesOptions" :key="i" :value="time" :disabled="timeDisable(endDate, startDate, time, startTime) <= 0">
+                    {{ (10 > time.hour ? `0${time.hour}` : time.hour) }}:{{ (10 > time.minute ? `0${time.minute}` : time.minute) }}
+                  </option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
-        <div class="ml-2 border-left pl-2">
-          <div class="mt-1 mb-2">
-            {{ $t('history.end') }}
+        <div class="d-flex justify-content-between mt-2">
+          <div class="text-left">
+            <b-button variant="outline-success" @click="showMode = 'past'">
+              {{ $t('history.pastPeriod') }}
+            </b-button>
           </div>
-          <div class="d-flex">
-            <div>
-              <div class="date-output form-control form-control-sm text-center">
-                {{ formatDateTime(endDateTime) }}
-              </div>
-              <b-calendar v-model="endDate" :locale="$i18n.locale" :date-info-fn="dateClass" :min="startDate" hide-header />
-            </div>
-            <div class="select-time ml-2">
-              <select v-model="endTime" class="custom-select" size="4">
-                <option v-for="(time, i) in timesOptions" :key="i" :value="time" :disabled="timeDisable(endDate, startDate, time, startTime) <= 0">
-                  {{ (10 > time.hour ? `0${time.hour}` : time.hour) }}:{{ (10 > time.minute ? `0${time.minute}` : time.minute) }}
-                </option>
-              </select>
-            </div>
+          <div class="text-right">
+            <b-button variant="outline-secondary" @click="closePopover">
+              {{ $t('history.cancel') }}
+            </b-button>
+            <b-button variant="primary" @click="submitCustom">
+              {{ $t('history.submit') }}
+            </b-button>
           </div>
         </div>
       </div>
-      <div class="mt-2 text-right">
-        <b-button variant="outline-secondary">
-          {{ $t('history.cancel') }}
-        </b-button>
-        <b-button variant="primary" @click="submit">
-          {{ $t('history.submit') }}
-        </b-button>
+      <div v-else class="past-period">
+        <ul class="menu">
+          <li>
+            <button class="period-item" @click="showMode = 'custom'">
+              <fa-icon icon="calendar" />
+              {{ $t('history.customPeriod') }}
+            </button>
+          </li>
+          <li v-for="(item, i) of pastPeriodOptions" :key="i" :class="[{'active': item.value === pastPeriod.value}]">
+            <button class="period-item" @click="choosePast(item)">
+              {{ $tc(`history.past.${item.unit}`, item.amount) }}
+            </button>
+          </li>
+        </ul>
       </div>
     </b-popover>
   </div>
@@ -73,6 +105,14 @@ export default {
   name: 'PeriodButton',
 
   props: {
+    mode: {
+      type: String,
+      default: 'past'
+    },
+    past: {
+      type: String,
+      default: '-1h'
+    },
     start: {
       type: Date,
       default: null
@@ -85,6 +125,9 @@ export default {
 
   data () {
     return {
+      showMode: this.mode,
+      modePeriod: this.mode,
+      pastPeriod: this.past,
       startDate: null,
       startTime: { hour: 0, minute: 0 },
       endDate: null,
@@ -120,11 +163,44 @@ export default {
       date.setHours(this.endTime.hour)
       date.setMinutes(this.endTime.minute)
       return date
+    },
+    pastPeriodOptions () {
+      const list = []
+
+      // Minutes
+      for (const i of [5, 15, 30]) {
+        list.push({
+          unit: 'minute',
+          amount: i,
+          value: `-${i}m`
+        })
+      }
+
+      // Hours
+      for (const i of [1, 3, 6, 12, 24]) {
+        list.push({
+          unit: 'hour',
+          amount: i,
+          value: `-${i}h`
+        })
+      }
+
+      // Day
+      for (const i of [2, 7, 30]) {
+        list.push({
+          unit: 'day',
+          amount: i,
+          value: `-${i}d`
+        })
+      }
+
+      return list
     }
   },
 
   created () {
     this.loadPeriodFromStorage()
+    this.$emit('loaded')
   },
 
   methods: {
@@ -157,45 +233,122 @@ export default {
       if (save) {
         const data = JSON.parse(save)
 
+        if (data.mode === undefined) {
+          this.modePeriod = this.mode
+          this.showMode = this.mode
+        } else {
+          this.modePeriod = data.mode
+          this.showMode = data.mode
+        }
+        this.pastPeriod = data.pastPeriod
         this.startDate = data.startDate
         this.startTime = data.startTime
         this.endDate = data.endDate
         this.endTime = data.endTime
 
+        this.$emit('update:mode', this.modePeriod)
+        this.$emit('update:past', this.pastPeriod)
         this.$emit('update:start', this.startDateTime)
         this.$emit('update:end', this.endDateTime)
       }
     },
     savePeriodToStorage () {
       window.localStorage.setItem('history-report-period', JSON.stringify({
+        mode: this.modePeriod,
+        pastPeriod: this.pastPeriod,
         startDate: this.startDate,
         startTime: this.startTime,
         endDate: this.endDate,
         endTime: this.endTime
       }))
     },
-    submit () {
+    showPopover () {
+      this.$root.$emit('bv::show::popover', 'popover-choose-period')
+    },
+    closePopover () {
+      this.$root.$emit('bv::hide::popover', 'popover-choose-period')
+    },
+    choosePast (v) {
+      this.modePeriod = 'past'
+      this.pastPeriod = v
       this.savePeriodToStorage()
 
+      this.$emit('update:mode', 'past')
+      this.$emit('update:past', this.pastPeriod)
+      this.$emit('change', {
+        mode: 'past',
+        start: v
+      })
+    },
+    submitCustom () {
+      this.modePeriod = 'custom'
+      this.savePeriodToStorage()
+
+      this.$emit('update:mode', 'custom')
       this.$emit('update:start', this.startDateTime)
       this.$emit('update:end', this.endDateTime)
-      this.$root.$emit('bv::hide::popover', 'popover-choose-period')
+      this.$emit('change', {
+        mode: 'custom',
+        start: this.startDateTime,
+        end: this.endDateTime
+      })
+
+      this.closePopover()
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .popover-period {
   max-width: unset;
+
+  .popover-body {
+    padding: 0;
+  }
+
+  .custom-period {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .past-period {
+    padding: .5rem 0;
+  }
 }
 .select-time {
     width: 140px !important;
     height: auto;
 
     .custom-select {
-        height: 100%;
+        height: 100% !important;
     }
+}
+.past-period {
+  .menu {
+    text-align: left;
+    list-style: none;
+    margin: .125rem 0 0;
+    padding: 0;
+
+    .period-item {
+      display: block;
+      width: 100%;
+      padding: .25rem 1.5rem;
+      clear: both;
+      font-weight: 400;
+      color: #212529;
+      text-align: inherit;
+      white-space: nowrap;
+      background-color: transparent;
+      border: 0;
+
+      &:focus,&:hover {
+        color: #16181b;
+        text-decoration: none;
+        background-color: #f8f9fa;
+      }
+    }
+  }
 }
 .date-output {
     margin-bottom: 0.25rem;

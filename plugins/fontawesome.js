@@ -17,11 +17,12 @@ import {
   faUserMinus,
   faClock,
   faCaretUp,
-  faCaretDown
+  faCaretDown,
+  faCalendar
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faUserMd, faUserInjured, faTachometerAlt, faChartArea, faSignOutAlt, faTrashAlt, faEdit, faPlus, faSave, faLongArrowAltLeft, faCheck, faTimes, faUserPlus, faUserMinus, faClock)
-library.add(faCaretUp, faCaretDown)
+library.add(faCaretUp, faCaretDown, faCalendar)
 
 Vue.component('FaIcon', FontAwesomeIcon)

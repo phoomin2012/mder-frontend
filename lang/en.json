@@ -106,17 +106,17 @@
             "edwins": "EDWINS"
         },
         "past": {
-            "minute": "Past {0} minute | Past {0} minutes",
-            "hour": "Past {0} hour | Past {0} hours",
-            "day": "Past {0} day | Past {0} days",
-            "week": "Past {0} week | Past {0} weeks",
-            "month": "Past {0} month | Past {0} months",
-            "year": "Past {0} year | Past {0} years"
+            "minute": "Past {n} minute | Past {n} minutes",
+            "hour": "Past {n} hour | Past {n} hours",
+            "day": "Past {n} day | Past {n} days",
+            "week": "Past {n} week | Past {n} weeks"
         },
         "time": "Time",
         "duration": "Duration",
         "level": "Level {0}",
         "choosePeriod": "Choose period",
+        "customPeriod": "Custom period",
+        "pastPeriod": "",
         "cancel": "Cancel",
         "submit": "Choose",
         "start": "Since",

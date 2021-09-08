@@ -7,8 +7,12 @@
       </h1>
       <div>
         <period-button
+          :mode.sync="modePeriod"
+          :past.sync="pastPeriod"
           :start.sync="startPeriod"
           :end.sync="endPeriod"
+          @change="changePeriod"
+          @loaded="fetchGraph"
         />
       </div>
     </div>
@@ -83,7 +87,8 @@ export default {
   data () {
     return {
       loading: false,
-      selectedPeriod: null,
+      modePeriod: 'custom',
+      pastPeriod: null,
       startPeriod: null,
       endPeriod: null,
       history: {
@@ -105,9 +110,6 @@ export default {
       this.renderChart3()
       this.renderChart4()
       this.renderChart5()
-    },
-    startPeriod () {
-      this.fetchGraph()
     }
   },
 
@@ -123,13 +125,17 @@ export default {
   },
 
   methods: {
+    changePeriod () {
+      this.fetchGraph()
+    },
     async fetchGraph () {
       try {
         this.loading = true
         const { data } = await this.$axios.get('/api/history', {
           params: {
-            start: this.startPeriod,
-            end: this.endPeriod
+            mode: this.modePeriod,
+            start: this.modePeriod === 'past' ? this.pastPeriod.value : this.startPeriod,
+            end: this.modePeriod === 'past' ? undefined : this.endPeriod
           }
         })
 
