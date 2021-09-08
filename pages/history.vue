@@ -184,6 +184,7 @@ export default {
           type: 'line',
           data,
           options: {
+            animation: false,
             locale: this.$i18n.locale,
             interaction: {
               intersect: false,
@@ -259,6 +260,7 @@ export default {
           type: 'line',
           data,
           options: {
+            animation: false,
             locale: this.$i18n.locale,
             interaction: {
               intersect: false,
@@ -348,6 +350,7 @@ export default {
           type: 'line',
           data,
           options: {
+            animation: false,
             locale: this.$i18n.locale,
             interaction: {
               intersect: false,
@@ -418,6 +421,7 @@ export default {
           type: 'line',
           data,
           options: {
+            animation: false,
             locale: this.$i18n.locale,
             interaction: {
               intersect: false,
