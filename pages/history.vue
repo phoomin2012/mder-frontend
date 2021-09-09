@@ -136,8 +136,6 @@ export default {
 
         for (const chart in data) {
           if (chart === 'finishIn') { continue }
-          // eslint-disable-next-line no-console
-          console.log(chart, data[chart].length)
           this.$set(this.history, chart, data[chart])
         }
 
