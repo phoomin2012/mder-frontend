@@ -134,8 +134,12 @@ export default {
       default: 'past'
     },
     past: {
-      type: String,
-      default: '-1h'
+      type: Object,
+      default: () => ({
+        unit: 'hour',
+        amount: 1,
+        value: '-1h'
+      })
     },
     start: {
       type: Date,
@@ -340,9 +344,11 @@ export default {
         this.timer = null
       }
 
-      this.timer = setInterval(() => {
-        this.$emit('fetch')
-      }, this.refreshRate * 1000)
+      if (this.refreshRate !== null) {
+        this.timer = setInterval(() => {
+          this.$emit('fetch')
+        }, this.refreshRate * 1000)
+      }
     },
     changeRefreshRate (rate) {
       this.refreshRate = rate

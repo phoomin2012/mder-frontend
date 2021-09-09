@@ -98,6 +98,9 @@
     },
     "history": {
         "title": "รายงาน",
+        "format": {
+            "day": "{0} วัน {1}"
+        },
         "amount": {
             "people": "จำนวนคน"
         },
@@ -118,6 +121,7 @@
         },
         "time": "เวลา",
         "duration": "ระยะเวลา",
+        "score": "คะแนน",
         "level": "ระดับ {0}",
         "choosePeriod": "เลือกช่วงเวลา",
         "customPeriod": "กำหนดช่วงเวลาเอง",

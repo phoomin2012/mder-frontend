@@ -65,7 +65,7 @@
 
 <script>
 // eslint-disable-next-line no-unused-vars
-import { format } from 'date-fns'
+import { intervalToDuration } from 'date-fns'
 import Chart from 'chart.js/auto'
 import 'chartjs-adapter-date-fns'
 import { PatientTriageColor, PatientStageColorHex, PatientStageNumber } from '@/service/patient'
@@ -136,8 +136,6 @@ export default {
 
         for (const chart in data) {
           if (chart === 'finishIn') { continue }
-          // eslint-disable-next-line no-console
-          console.log(chart, data[chart].length)
           this.$set(this.history, chart, data[chart])
         }
 
@@ -266,6 +264,31 @@ export default {
               intersect: false,
               mode: 'index'
             },
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  label: (context) => {
+                    let label = context.dataset.label || ''
+
+                    if (label) {
+                      label += ': '
+                    }
+
+                    if (context.parsed.y !== null) {
+                      const d = intervalToDuration({ start: 0, end: context.parsed.y * 1000 })
+                      const f = `${d.hours < 10 ? '0' + d.hours : d.hours}:${d.minutes < 10 ? '0' + d.minutes : d.minutes}:${d.seconds < 10 ? '0' + d.seconds : d.seconds}`
+                      if (d.days > 0) {
+                        label += this.$t('history.format.day', [d.days, f])
+                      } else {
+                        label += f
+                      }
+                    }
+
+                    return label
+                  }
+                }
+              }
+            },
             scales: {
               x: {
                 grid: {
@@ -292,7 +315,17 @@ export default {
                   display: true,
                   text: ''
                 },
-                suggestedMax: 10
+                suggestedMax: 10,
+                ticks: {
+                  callback: (value, index, values) => {
+                    const d = intervalToDuration({ start: 0, end: value * 1000 })
+                    const f = `${d.hours < 10 ? '0' + d.hours : d.hours}:${d.minutes < 10 ? '0' + d.minutes : d.minutes}:${d.seconds < 10 ? '0' + d.seconds : d.seconds}`
+                    if (d.days > 0) {
+                      return this.$t('history.format.day', [d.days, f])
+                    }
+                    return f
+                  }
+                }
               }
             }
           }
@@ -427,6 +460,121 @@ export default {
               intersect: false,
               mode: 'index'
             },
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  label: (context) => {
+                    let label = context.dataset.label || ''
+
+                    if (label) {
+                      label += ': '
+                    }
+
+                    if (context.parsed.y !== null) {
+                      const d = intervalToDuration({ start: 0, end: context.parsed.y * 1000 })
+                      const f = `${d.hours < 10 ? '0' + d.hours : d.hours}:${d.minutes < 10 ? '0' + d.minutes : d.minutes}:${d.seconds < 10 ? '0' + d.seconds : d.seconds}`
+                      if (d.days > 0) {
+                        label += this.$t('history.format.day', [d.days, f])
+                      } else {
+                        label += f
+                      }
+                    }
+
+                    return label
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: {
+                  display: false
+                },
+                type: 'timeseries',
+                time: {
+                  unit: 'second',
+                  tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
+                  displayFormats: {
+                    second: 'HH:mm:ss'
+                  }
+                },
+                title: {
+                  display: true,
+                  text: ''
+                }
+              },
+              y: {
+                grid: {
+                  display: false
+                },
+                title: {
+                  display: true,
+                  text: ''
+                },
+                suggestedMax: 10,
+                ticks: {
+                  callback: (value, index, values) => {
+                    const d = intervalToDuration({ start: 0, end: value * 1000 })
+                    const f = `${d.hours < 10 ? '0' + d.hours : d.hours}:${d.minutes < 10 ? '0' + d.minutes : d.minutes}:${d.seconds < 10 ? '0' + d.seconds : d.seconds}`
+                    if (d.days > 0) {
+                      return this.$t('history.format.day', [d.days, f])
+                    }
+                    return f
+                  }
+                }
+              }
+            }
+          }
+        })
+      }
+
+      this.charts[4].options.locale = this.$i18n.locale
+      this.charts[4].options.scales.x.title.text = this.$t('history.time')
+      this.charts[4].options.scales.y.title.text = this.$t('history.duration')
+      this.charts[4].data = data
+      this.charts[4].update()
+    },
+    renderChart5 () {
+      const data = {
+        labels: [],
+        datasets: [
+          {
+            label: 'NEDOCS',
+            backgroundColor: '',
+            borderColor: '',
+            data: [],
+            pointRadius: 0,
+            borderWidth: 1
+          },
+          {
+            label: 'EDWIN',
+            backgroundColor: '',
+            borderColor: '',
+            data: [],
+            pointRadius: 0,
+            borderWidth: 1
+          }
+        ]
+      }
+
+      for (const e of this.history.chart5) {
+        data.labels.push(new Date(e.time))
+        data.datasets[0].data.push(e.nedocs)
+        data.datasets[1].data.push(e.edwin)
+      }
+
+      if (typeof this.charts[5] === 'undefined') {
+        const ctx = document.getElementById('chart-5')
+        this.charts[5] = new Chart(ctx, {
+          type: 'line',
+          data,
+          options: {
+            animation: false,
+            locale: this.$i18n.locale,
+            interaction: {
+              intersect: false,
+              mode: 'index'
+            },
             scales: {
               x: {
                 grid: {
@@ -460,14 +608,11 @@ export default {
         })
       }
 
-      this.charts[4].options.locale = this.$i18n.locale
-      this.charts[4].options.scales.x.title.text = this.$t('history.time')
-      this.charts[4].options.scales.y.title.text = this.$t('history.duration')
-      this.charts[4].data = data
-      this.charts[4].update()
-    },
-    renderChart5 () {
-
+      this.charts[5].options.locale = this.$i18n.locale
+      this.charts[5].options.scales.x.title.text = this.$t('history.time')
+      this.charts[5].options.scales.y.title.text = this.$t('history.score')
+      this.charts[5].data = data
+      this.charts[5].update()
     }
   }
 }

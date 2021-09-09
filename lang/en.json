@@ -98,6 +98,9 @@
     },
     "history": {
         "title": "History report",
+        "format": {
+            "day": "{0} days {1}"
+        },
         "amount": {
             "people": "People"
         },
@@ -118,6 +121,7 @@
         },
         "time": "Time",
         "duration": "Duration",
+        "score": "Score",
         "level": "Level {0}",
         "choosePeriod": "Choose period",
         "customPeriod": "Custom period",
