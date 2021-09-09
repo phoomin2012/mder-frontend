@@ -65,7 +65,7 @@
 
 <script>
 // eslint-disable-next-line no-unused-vars
-import { format } from 'date-fns'
+import { intervalToDuration } from 'date-fns'
 import Chart from 'chart.js/auto'
 import 'chartjs-adapter-date-fns'
 import { PatientTriageColor, PatientStageColorHex, PatientStageNumber } from '@/service/patient'
@@ -264,6 +264,31 @@ export default {
               intersect: false,
               mode: 'index'
             },
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  label: (context) => {
+                    let label = context.dataset.label || ''
+
+                    if (label) {
+                      label += ': '
+                    }
+
+                    if (context.parsed.y !== null) {
+                      const d = intervalToDuration({ start: 0, end: context.parsed.y * 1000 })
+                      const f = `${d.hours < 10 ? '0' + d.hours : d.hours}:${d.minutes < 10 ? '0' + d.minutes : d.minutes}:${d.seconds < 10 ? '0' + d.seconds : d.seconds}`
+                      if (d.days > 0) {
+                        label += this.$t('history.format.day', [d.days, f])
+                      } else {
+                        label += f
+                      }
+                    }
+
+                    return label
+                  }
+                }
+              }
+            },
             scales: {
               x: {
                 grid: {
@@ -290,7 +315,17 @@ export default {
                   display: true,
                   text: ''
                 },
-                suggestedMax: 10
+                suggestedMax: 10,
+                ticks: {
+                  callback: (value, index, values) => {
+                    const d = intervalToDuration({ start: 0, end: value * 1000 })
+                    const f = `${d.hours < 10 ? '0' + d.hours : d.hours}:${d.minutes < 10 ? '0' + d.minutes : d.minutes}:${d.seconds < 10 ? '0' + d.seconds : d.seconds}`
+                    if (d.days > 0) {
+                      return this.$t('history.format.day', [d.days, f])
+                    }
+                    return f
+                  }
+                }
               }
             }
           }
@@ -425,6 +460,31 @@ export default {
               intersect: false,
               mode: 'index'
             },
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  label: (context) => {
+                    let label = context.dataset.label || ''
+
+                    if (label) {
+                      label += ': '
+                    }
+
+                    if (context.parsed.y !== null) {
+                      const d = intervalToDuration({ start: 0, end: context.parsed.y * 1000 })
+                      const f = `${d.hours < 10 ? '0' + d.hours : d.hours}:${d.minutes < 10 ? '0' + d.minutes : d.minutes}:${d.seconds < 10 ? '0' + d.seconds : d.seconds}`
+                      if (d.days > 0) {
+                        label += this.$t('history.format.day', [d.days, f])
+                      } else {
+                        label += f
+                      }
+                    }
+
+                    return label
+                  }
+                }
+              }
+            },
             scales: {
               x: {
                 grid: {
@@ -451,7 +511,17 @@ export default {
                   display: true,
                   text: ''
                 },
-                suggestedMax: 10
+                suggestedMax: 10,
+                ticks: {
+                  callback: (value, index, values) => {
+                    const d = intervalToDuration({ start: 0, end: value * 1000 })
+                    const f = `${d.hours < 10 ? '0' + d.hours : d.hours}:${d.minutes < 10 ? '0' + d.minutes : d.minutes}:${d.seconds < 10 ? '0' + d.seconds : d.seconds}`
+                    if (d.days > 0) {
+                      return this.$t('history.format.day', [d.days, f])
+                    }
+                    return f
+                  }
+                }
               }
             }
           }

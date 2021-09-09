@@ -98,6 +98,9 @@
     },
     "history": {
         "title": "รายงาน",
+        "format": {
+            "day": "{0} วัน {1}"
+        },
         "amount": {
             "people": "จำนวนคน"
         },
