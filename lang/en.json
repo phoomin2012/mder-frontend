@@ -118,6 +118,7 @@
         },
         "time": "Time",
         "duration": "Duration",
+        "score": "Score",
         "level": "Level {0}",
         "choosePeriod": "Choose period",
         "customPeriod": "Custom period",

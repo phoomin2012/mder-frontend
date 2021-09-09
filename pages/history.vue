@@ -465,7 +465,84 @@ export default {
       this.charts[4].update()
     },
     renderChart5 () {
+      const data = {
+        labels: [],
+        datasets: [
+          {
+            label: 'NEDOCS',
+            backgroundColor: '',
+            borderColor: '',
+            data: [],
+            pointRadius: 0,
+            borderWidth: 1
+          },
+          {
+            label: 'EDWIN',
+            backgroundColor: '',
+            borderColor: '',
+            data: [],
+            pointRadius: 0,
+            borderWidth: 1
+          }
+        ]
+      }
 
+      for (const e of this.history.chart5) {
+        data.labels.push(new Date(e.time))
+        data.datasets[0].data.push(e.nedocs)
+        data.datasets[1].data.push(e.edwin)
+      }
+
+      if (typeof this.charts[5] === 'undefined') {
+        const ctx = document.getElementById('chart-5')
+        this.charts[5] = new Chart(ctx, {
+          type: 'line',
+          data,
+          options: {
+            animation: false,
+            locale: this.$i18n.locale,
+            interaction: {
+              intersect: false,
+              mode: 'index'
+            },
+            scales: {
+              x: {
+                grid: {
+                  display: false
+                },
+                type: 'timeseries',
+                time: {
+                  unit: 'second',
+                  tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
+                  displayFormats: {
+                    second: 'HH:mm:ss'
+                  }
+                },
+                title: {
+                  display: true,
+                  text: ''
+                }
+              },
+              y: {
+                grid: {
+                  display: false
+                },
+                title: {
+                  display: true,
+                  text: ''
+                },
+                suggestedMax: 10
+              }
+            }
+          }
+        })
+      }
+
+      this.charts[5].options.locale = this.$i18n.locale
+      this.charts[5].options.scales.x.title.text = this.$t('history.time')
+      this.charts[5].options.scales.y.title.text = this.$t('history.score')
+      this.charts[5].data = data
+      this.charts[5].update()
     }
   }
 }
