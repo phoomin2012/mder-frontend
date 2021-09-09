@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-row>
+    <b-row class="mb-3">
       <b-col>
         <b-card class="h-100" no-body>
           <b-card-body class="d-flex flex-column justify-content-between">
@@ -47,7 +47,7 @@
         </b-card>
       </b-col>
     </b-row>
-    <b-row>
+    <b-row class="mb-3">
       <b-col md="9">
         <b-card no-body>
           <b-table :fields="fields" :items="patientFiltered" responsive class="mb-0">
@@ -243,7 +243,11 @@ export default {
         start: parseJSON(stage.start),
         end: this.now
       })
-      return (duration.hours < 10 ? '0' : '') + duration.hours + ':' + (duration.minutes < 10 ? '0' : '') + duration.minutes + ':' + (duration.seconds < 10 ? '0' : '') + duration.seconds
+      const f = (duration.hours < 10 ? '0' : '') + duration.hours + ':' + (duration.minutes < 10 ? '0' : '') + duration.minutes + ':' + (duration.seconds < 10 ? '0' : '') + duration.seconds
+      if (duration.days > 0) {
+        return this.$t('history.format.day', [duration.days, f])
+      }
+      return f
     },
     triageTextColor (level) {
       if (typeof PatientTriageColor[level] !== 'undefined') {
