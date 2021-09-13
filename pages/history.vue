@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between align-items-center">
       <h1>
         <fa-icon icon="chart-area" />
-        {{ $t('history.title') }}
+        {{ $t('history.title') }} ({{ formatDate(endPeriod) }})
       </h1>
       <div>
         <period-button
@@ -65,7 +65,7 @@
 
 <script>
 // eslint-disable-next-line no-unused-vars
-import { intervalToDuration } from 'date-fns'
+import { intervalToDuration, format } from 'date-fns'
 import Chart from 'chart.js/auto'
 import 'chartjs-adapter-date-fns'
 import { PatientTriageColor, PatientStageColorHex, PatientStageNumber } from '@/service/patient'
@@ -122,6 +122,17 @@ export default {
   methods: {
     changePeriod () {
       this.fetchGraph()
+    },
+    formatDate (date) {
+      if (this.modePeriod === 'past') {
+        return format(new Date(), 'yyyy-MM-dd')
+      } else {
+        try {
+          return format(date, 'yyyy-MM-dd')
+        } catch (e) {
+          return ''
+        }
+      }
     },
     async fetchGraph () {
       try {

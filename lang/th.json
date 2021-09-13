@@ -55,9 +55,20 @@
             "diagnosis": "Diagnosis",
             "treatment": "Treatment",
             "disposition": "Disposition",
-            "discharged": "Disposition - Discharged",
-            "admitted": "Disposition - Admitted",
-            "transferred": "Disposition - Transferred"
+            "discharged": "Discharged",
+            "admitted": "Admitted",
+            "transferred": "Transferred"
+        },
+        "stagesShort": {
+            "triage": "Triage",
+            "investigation": "Investigation",
+            "consultation": "Consultation",
+            "diagnosis": "Diagnosis",
+            "treatment": "Treatment",
+            "disposition": "Disposition",
+            "discharged": "Discharged",
+            "admitted": "Admitted",
+            "transferred": "Transferred"
         },
         "information": "ข้อมูลผู้ป่วย",
         "edit": "แก้ไขข้อมูล",

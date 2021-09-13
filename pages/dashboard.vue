@@ -1,10 +1,10 @@
 <template>
   <div>
-    <b-row>
+    <b-row class="mb-3">
       <b-col>
         <b-card class="h-100" no-body>
           <b-card-body class="d-flex flex-column justify-content-between">
-            <h3 class="text-right">
+            <h3 class="text-right mb-0">
               {{ $t('dashboard.staffCount') }}
             </h3>
             <span class="font-weight-bold">
@@ -16,7 +16,7 @@
       <b-col>
         <b-card class="h-100" no-body>
           <b-card-body class="d-flex flex-column justify-content-between">
-            <h3 class="text-right">
+            <h3 class="text-right mb-0">
               {{ $tc('dashboard.currentPatient', patients.length) }}
             </h3>
             <span class="font-weight-bold">{{ patients.length }}</span>
@@ -26,7 +26,7 @@
       <b-col>
         <b-card class="h-100" no-body>
           <b-card-body class="d-flex flex-column justify-content-between">
-            <h3 class="text-right">
+            <h3 class="text-right mb-0">
               {{ $t('dashboard.patientToday') }}
             </h3>
             <span class="font-weight-bold">-</span>
@@ -36,7 +36,7 @@
       <b-col>
         <b-card class="h-100" no-body>
           <b-card-body class="d-flex flex-column justify-content-between">
-            <h3 class="text-right">
+            <h3 class="text-right mb-0">
               {{ $t('dashboard.time') }}
             </h3>
             <div class="">
@@ -47,10 +47,11 @@
         </b-card>
       </b-col>
     </b-row>
-    <b-row>
+
+    <b-row class="mb-3">
       <b-col md="9">
-        <b-card no-body>
-          <b-table :fields="fields" :items="patientFiltered" responsive class="mb-0">
+        <b-card no-body class="h-100">
+          <b-table :fields="fields" :items="patientFiltered" responsive sticky-header class="mb-0">
             <template #cell(hospitalNumber)="data">
               <b-button block variant="outline-success" @click.prevent="openPatientPopup(data.item)">
                 {{ data.item.hospitalNumber }}
@@ -88,9 +89,51 @@
         </b-card>
       </b-col>
       <b-col>
+        <b-card title="NEDOCS Score" class="mb-3">
+          123
+        </b-card>
+        <b-card title="Overcrowding meter" class="mb-3">
+          ....
+        </b-card>
         <countdownBox @patient="openPatientPopup" />
       </b-col>
     </b-row>
+
+    <b-row class="mb-3">
+      <b-col>
+        <b-card>
+          <div>24hr patients & staff statistics</div>
+        </b-card>
+      </b-col>
+      <b-col>
+        <b-card>
+          <div>Percent of length of stay in ER (Hour)</div>
+          <b-row>
+            <b-col />
+            <b-col />
+          </b-row>
+        </b-card>
+      </b-col>
+    </b-row>
+
+    <div class="d-flex footer-row">
+      <b-card class="flex-grow-1" no-body>
+        <b-card-body class="d-flex flex-column">
+          <small class="font-weight-bold">Average length of stay</small>
+          <div class="text-center flex-grow-1 d-flex justify-content-center align-items-center">
+            <div class="font-weight-bold text-warning" style="font-size: 1.6rem;">
+              22222 min
+            </div>
+          </div>
+        </b-card-body>
+      </b-card>
+      <b-card v-for="(name, stageId) in Stages" :key="stageId" class="text-center">
+        <small>{{ $t(`patient.stagesShort.${name}`) }}</small>
+        <div :class="`donut donut-${stageProgressColor(stageId)}`">
+          <div>{{ patientInEachStage[stageId] || 0 }}</div>
+        </div>
+      </b-card>
+    </div>
 
     <b-modal ref="modal-patient" hide-footer>
       <template #modal-title>
@@ -170,6 +213,19 @@ export default {
         }
       })
     },
+    Stages () {
+      return PatientStageNumber
+    },
+    patientInEachStage () {
+      const stageList = {}
+      for (const patient of this.patients) {
+        if (typeof stageList[patient.currentStage] === 'undefined') {
+          stageList[patient.currentStage] = 0
+        }
+        stageList[patient.currentStage] += 1
+      }
+      return stageList
+    },
     fields () {
       return [
         {
@@ -243,7 +299,11 @@ export default {
         start: parseJSON(stage.start),
         end: this.now
       })
-      return (duration.hours < 10 ? '0' : '') + duration.hours + ':' + (duration.minutes < 10 ? '0' : '') + duration.minutes + ':' + (duration.seconds < 10 ? '0' : '') + duration.seconds
+      const f = (duration.hours < 10 ? '0' : '') + duration.hours + ':' + (duration.minutes < 10 ? '0' : '') + duration.minutes + ':' + (duration.seconds < 10 ? '0' : '') + duration.seconds
+      if (duration.days > 0) {
+        return this.$t('history.format.day', [duration.days, f])
+      }
+      return f
     },
     triageTextColor (level) {
       if (typeof PatientTriageColor[level] !== 'undefined') {
@@ -272,3 +332,66 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  @import "bootstrap/scss/bootstrap";
+
+  .footer-row {
+    & > div.card {
+      &:first-child {
+        & > .card-body {
+          padding: 0.6rem 0.9rem;
+        }
+      }
+
+      &:not(:first-child) {
+        width: 9%;
+        margin-left: 5px;
+
+        & > .card-body {
+          padding: 0.6rem 0.9rem;
+        }
+      }
+    }
+
+    .donut {
+      margin-top: 10px;
+      position: relative;
+      width: 100%;
+      height: auto;
+      padding-bottom: 100%;
+
+      border-radius: 50%;
+      background: #fff;
+
+      @each $color, $value in $theme-colors {
+        &.donut-#{$color} {
+          &::after {
+            border-color: $value !important;
+          }
+        }
+      }
+
+      &:after {
+        position: absolute;
+        border-radius: inherit;
+        content: "";
+        border: 14px solid #bbb;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+      }
+
+      & > div {
+        position:absolute;
+        top:50%; left:50%;
+        transform: translate(-50%, -50%);
+        margin:0;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+    }
+  }
+</style>
