@@ -1,5 +1,6 @@
 html,
 body,
 div#__nuxt {
-  height: 100% !important;
+  min-height: 100% !important;
+  height: 100%;
 }

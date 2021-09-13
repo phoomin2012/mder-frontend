@@ -13,7 +13,7 @@ export const PatientStageNumber = {
 export const PatientStageColor = {
   1: 'secondary',
   2: 'danger',
-  3: '',
+  3: 'primary',
   4: 'warning',
   5: 'success',
   60: 'info',
@@ -25,7 +25,7 @@ export const PatientStageColor = {
 export const PatientStageColorHex = {
   1: '#6c757d',
   2: '#dc3545',
-  3: '#212529',
+  3: '#007bff',
   4: '#ffc107',
   5: '#28a745',
   60: '#17a2b8',
