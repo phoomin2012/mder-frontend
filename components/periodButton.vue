@@ -156,7 +156,11 @@ export default {
       refreshRate: null,
       showMode: this.mode,
       modePeriod: this.mode,
-      pastPeriod: this.past,
+      pastPeriod: this.past || {
+        unit: 'hour',
+        amount: 1,
+        value: '-1h'
+      },
       startDate: null,
       startTime: { hour: 0, minute: 0 },
       endDate: null,
