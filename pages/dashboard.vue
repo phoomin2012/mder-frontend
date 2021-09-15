@@ -151,10 +151,10 @@ import { format, parseJSON, isToday, isYesterday, intervalToDuration, difference
 import { enUS, th } from 'date-fns/locale'
 import { mapGetters } from 'vuex'
 import { PatientStageColor, PatientTriageColor, PatientStageNumber } from '@/service/patient'
-import PopupPatient from '~/components/patientInformation.vue'
-import CountdownBox from '~/components/countDownBox.vue'
-import CountdownForm from '~/components/countdownForm.vue'
-import OvercrowdMeter from '~/components/overcrowdMeter.vue'
+import PopupPatient from '~/components/dashboard/patientInformation.vue'
+import CountdownBox from '~/components/dashboard/countDownBox.vue'
+import CountdownForm from '~/components/dashboard/countdownForm.vue'
+import OvercrowdMeter from '~/components/dashboard/overcrowdMeter.vue'
 
 export default {
   components: {
