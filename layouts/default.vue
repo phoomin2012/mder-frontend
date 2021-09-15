@@ -23,8 +23,12 @@ div#__nuxt {
 
 .app-wrapper {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
+  height: unset;
   display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+
   & > div {
     // Sidebar
     &.sidebar {
@@ -62,6 +66,8 @@ div#__nuxt {
       flex-grow: 1;
       background: #e5e5e5;
       padding: 2.5rem;
+      height: unset;
+      box-sizing: border-box;
     }
   }
 }
