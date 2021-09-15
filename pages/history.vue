@@ -70,7 +70,7 @@ import Chart from 'chart.js/auto'
 import 'chartjs-adapter-date-fns'
 import { PatientTriageColor, PatientStageColorHex, PatientStageNumber } from '@/service/patient'
 import { Swal } from '~/plugins/sweetalert2'
-import PeriodButton from '~/components/periodButton.vue'
+import PeriodButton from '~/components/history/periodButton.vue'
 
 export default {
   components: {
