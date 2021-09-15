@@ -94,22 +94,7 @@
       </b-col>
     </b-row>
 
-    <b-row class="mb-3">
-      <b-col>
-        <b-card>
-          <div>24hr patients & staff statistics</div>
-        </b-card>
-      </b-col>
-      <b-col>
-        <b-card>
-          <div>Percent of length of stay in ER (Hour)</div>
-          <b-row>
-            <b-col />
-            <b-col />
-          </b-row>
-        </b-card>
-      </b-col>
-    </b-row>
+    <statistics-24-hour />
 
     <div class="d-flex footer-row">
       <b-card class="flex-grow-1" no-body>
@@ -155,13 +140,15 @@ import PopupPatient from '~/components/dashboard/patientInformation.vue'
 import CountdownBox from '~/components/dashboard/countDownBox.vue'
 import CountdownForm from '~/components/dashboard/countdownForm.vue'
 import OvercrowdMeter from '~/components/dashboard/overcrowdMeter.vue'
+import Statistics24Hour from '~/components/dashboard/Statistics24Hour.vue'
 
 export default {
   components: {
     PopupPatient,
     CountdownBox,
     CountdownForm,
-    OvercrowdMeter
+    OvercrowdMeter,
+    Statistics24Hour
   },
 
   middleware: 'auth',
