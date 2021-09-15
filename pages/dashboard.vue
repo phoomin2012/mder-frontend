@@ -89,12 +89,7 @@
         </b-card>
       </b-col>
       <b-col>
-        <b-card title="NEDOCS Score" class="mb-3">
-          123
-        </b-card>
-        <b-card title="Overcrowding meter" class="mb-3">
-          ....
-        </b-card>
+        <overcrowd-meter />
         <countdownBox @patient="openPatientPopup" />
       </b-col>
     </b-row>
@@ -159,12 +154,14 @@ import { PatientStageColor, PatientTriageColor, PatientStageNumber } from '@/ser
 import PopupPatient from '~/components/patientInformation.vue'
 import CountdownBox from '~/components/countDownBox.vue'
 import CountdownForm from '~/components/countdownForm.vue'
+import OvercrowdMeter from '~/components/overcrowdMeter.vue'
 
 export default {
   components: {
     PopupPatient,
     CountdownBox,
-    CountdownForm
+    CountdownForm,
+    OvercrowdMeter
   },
 
   middleware: 'auth',
