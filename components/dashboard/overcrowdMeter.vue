@@ -57,12 +57,7 @@ export default {
     updatePointer (value) {
       const max = 200
       const r = (360 / 2) * (Math.min(value, max) / max) - 90
-      // eslint-disable-next-line no-console
-      console.log(`New rotate (${value},150)`, r)
-
-      this.pointer.transition()
-        .duration(750)
-        .attr('transform', `rotate(${r})`)
+      this.pointer.transition().duration(750).attr('transform', `rotate(${r})`)
     },
     createMeter () {
       const width = 300; const height = 300
@@ -99,6 +94,7 @@ export default {
       const arc = d3.arc().innerRadius(d => radius * 0.6).outerRadius(d => radius - 1)
         .startAngle(d => d.startAngle / 2 + (-90 * Math.PI / 180))
         .endAngle(d => d.endAngle / 2 + (-90 * Math.PI / 180))
+        .padAngle(() => 0)
 
       const color = d3.scaleOrdinal().domain(data.map(d => d.name)).range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), data.length).reverse())
 
@@ -133,13 +129,12 @@ export default {
         .attr('class', 'pointer')
         .attr('transform', 'translate(0,0)')
 
-      // eslint-disable-next-line no-unused-vars
       const pointer = pg.append('path')
         .attr('d', pointerLine/* function(d) { return pointerLine(d) +'Z';} */)
         .attr('transform', d => 'rotate(-90)')
 
       const node = svg.node()
-      document.getElementById('overcrowd-meter').append(node)
+      document.getElementById('overcrowd-meter').appendChild(node)
       this.pointer = this.$set(this, 'pointer', pointer)
     }
   }
