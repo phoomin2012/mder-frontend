@@ -43,9 +43,9 @@ export default {
     this.createMeter()
 
     // Fake meter value
-    this.XnedocsScore = (Math.random() * 150)
+    this.XnedocsScore = (Math.random() * 200)
     this.timer = setInterval(() => {
-      this.XnedocsScore = (Math.random() * 150)
+      this.XnedocsScore = (Math.random() * 200)
     }, 2500)
   },
 
@@ -55,7 +55,7 @@ export default {
 
   methods: {
     updatePointer (value) {
-      const max = 150
+      const max = 200
       const r = (360 / 2) * (Math.min(value, max) / max) - 90
       // eslint-disable-next-line no-console
       console.log(`New rotate (${value},150)`, r)
@@ -74,13 +74,25 @@ export default {
       const pointerTailLength = 10
 
       const data = [
-        { name: '0', value: 10 },
-        { name: '10', value: 10 },
-        { name: '20', value: 10 }
+        { name: 'Not busy', value: 20 },
+        { name: 'Busy', value: 40 },
+        { name: 'Extremely busy but not overcrowded', value: 40 },
+        { name: 'Overcrowded', value: 40 },
+        { name: 'Severely overcrowded', value: 40 },
+        { name: 'Dangerously overcrowded', value: 20 }
+      ]
+      const data2 = [
+        { name: 'Not busy', value: 0 },
+        { name: 'Not busy', value: 20 },
+        { name: 'Busy', value: 60 },
+        { name: 'Extremely busy but not overcrowded', value: 100 },
+        { name: 'Overcrowded', value: 140 },
+        { name: 'Severely overcrowded', value: 180 },
+        { name: 'Dangerously overcrowded', value: 200 }
       ]
 
       const pie = d3.pie().padAngle(0.005).sort(null).value(d => d.value)
-      const svg = d3.create('svg').attr('viewBox', [-width / 2, -height / 2, width, height / 2 + pointerTailLength])
+      const svg = d3.create('svg').attr('viewBox', [-width / 2 - 10, -height / 2 - 10, width + 20, height / 2 + pointerTailLength + 12])
 
       const arcs = pie(data)
 
@@ -96,25 +108,20 @@ export default {
         .attr('fill', d => color(d.data.name))
         .attr('d', arc)
         .append('title')
-        .text(d => `${d.data.name}: ${d.data.value.toLocaleString()}`)
+        .text(d => d.data.name)
 
       svg.append('g')
         .attr('font-family', 'sans-serif')
         .attr('font-size', 12)
-        .attr('text-anchor', 'middle')
+        .attr('class', 'label')
         .selectAll('text')
-        .data(arcs)
-        .join('text')
-        .attr('transform', d => `translate(${arc.centroid(d)})`)
-        .call(text => text.append('tspan')
-          .attr('y', '-0.4em')
-          .attr('transform', d => `rotate(${d.startAngle * 180 - 90})`)
-          .text(d => d.data.name))
-        .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append('tspan')
-          .attr('x', 0)
-          .attr('y', '0.7em')
-          .attr('fill-opacity', 0.7)
-          .text(d => d.data.value.toLocaleString()))
+        .data(data2)
+        .enter().append('text')
+        .attr('transform', (d) => {
+          return `rotate(${(180 * (d.value / 200) - 90) - d.value.toString().length}) translate(0, -150)`
+        }).text((d) => {
+          return d.value
+        })
 
       const lineData = [[pointerWidth / 2, 0],
         [0, -pointerHeadLength],
