@@ -100,7 +100,7 @@ export default {
       }
     },
     updatePointerEDWIN (value) {
-      const max = 200
+      const max = 2.5
       const r = (360 / 2) * (Math.min(value, max) / max) - 90
       if (this.pointerEDWIN) {
         this.pointerEDWIN.transition().duration(750).attr('transform', `rotate(${r})`)
