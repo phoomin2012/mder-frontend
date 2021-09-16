@@ -1,4 +1,3 @@
-@@ -1,9 +0,0 @@
 import { mount } from '@vue/test-utils'
 import Sidebar from '@/components/sidebar.vue'
 
