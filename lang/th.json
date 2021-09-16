@@ -12,7 +12,8 @@
         "roles": {
             "physician": "หมอ",
             "nurse": "พยาบาล",
-            "patient": "ผู้ป่วย"
+            "patient": "ผู้ป่วย",
+            "staff": "Staff"
         },
         "nonRole": "--- โปรดเลือกตำแหน่งของบัญชี ---",
         "new": "เพิ่มบัญชี Staff",
