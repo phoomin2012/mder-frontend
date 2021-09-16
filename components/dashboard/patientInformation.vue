@@ -36,8 +36,12 @@
           <td>{{ stageName(patient.currentStage) }}</td>
         </tr>
         <tr>
-          <td>{{ $t('patient.entryAndExit') }}</td>
-          <td>{{ dateFormatShort(patient.entry) }}/{{ dateFormatShort(patient.exit) }}</td>
+          <td>{{ $t('patient.entryTime') }}</td>
+          <td>{{ dateFormatShort(patient.entry) }}</td>
+        </tr>
+        <tr>
+          <td>{{ $t('patient.exitTime') }}</td>
+          <td>{{ dateFormatShort(patient.exit) }}</td>
         </tr>
         <tr>
           <td>{{ $t('patient.timeInterval') }}</td>
@@ -403,7 +407,9 @@ export default {
           triage: this.form.triage,
           stage: this.form.stage,
           entryDate: this.form.entryDate,
-          entryTime: this.form.entryTime
+          entryTime: this.form.entryTime,
+          exitDate: this.form.exitDate,
+          exitTime: this.form.exitTime
         })
         this.isEdit = false
         Toast.fire(this.$t('popup.patient.success.edit'))
