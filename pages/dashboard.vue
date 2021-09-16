@@ -102,7 +102,7 @@
           <small class="font-weight-bold">Average length of stay</small>
           <div class="text-center flex-grow-1 d-flex justify-content-center align-items-center">
             <div class="font-weight-bold text-warning" style="font-size: 1.6rem;">
-              {{ Math.isNaN(averageLOS) ? '-' : `${averageLOS} min` }}
+              {{ isNaN(averageLOS) ? '-' : `${averageLOS} min` }}
             </div>
           </div>
         </b-card-body>
