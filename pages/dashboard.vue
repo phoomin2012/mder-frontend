@@ -72,7 +72,7 @@
               <b-progress :max="6">
                 <b-progress-bar
                   v-b-tooltip.hover="stageName(data.item.currentStage)"
-                  animated
+                  :animated="data.item.exit === null"
                   :value="data.item.currentStage > 6 ? 6 : data.item.currentStage"
                   :variant="stageProgressColor(data.item.currentStage)"
                 />
@@ -102,7 +102,7 @@
           <small class="font-weight-bold">Average length of stay</small>
           <div class="text-center flex-grow-1 d-flex justify-content-center align-items-center">
             <div class="font-weight-bold text-warning" style="font-size: 1.6rem;">
-              22222 min
+              {{ averageLOS }} min
             </div>
           </div>
         </b-card-body>
@@ -209,6 +209,16 @@ export default {
         stageList[patient.currentStage] += 1
       }
       return stageList
+    },
+    averageLOS () {
+      let t = 0
+      const p = this.patients.length
+
+      for (const patient of this.patients) {
+        t += differenceInSeconds(this.now, parseJSON(patient.entry))
+      }
+
+      return Math.floor((t / p) / 60).toLocaleString()
     },
     fields () {
       return [
