@@ -93,7 +93,6 @@ export default {
         chart4: [],
         chart5: []
       },
-      timer: null,
       charts: {}
     }
   },
