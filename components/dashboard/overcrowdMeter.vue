@@ -107,7 +107,7 @@ export default {
       }
     },
     createMeterEDWIN () {
-      const colors = ['#CBE54E', '#FD8F52', '#FE676E']
+      const colors = ['#32CD32', '#FFFF33', '#FF0000']
       const width = 300; const height = 300
 
       const radius = Math.min(width, height) / 2
