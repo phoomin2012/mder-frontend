@@ -102,7 +102,7 @@
           <small class="font-weight-bold">Average length of stay</small>
           <div class="text-center flex-grow-1 d-flex justify-content-center align-items-center">
             <div class="font-weight-bold text-warning" style="font-size: 1.6rem;">
-              {{ isNaN(averageLOS) ? '-' : `${averageLOS} min` }}
+              {{ averageLOS ? `${averageLOS} min` : '-' }}
             </div>
           </div>
         </b-card-body>
@@ -214,6 +214,9 @@ export default {
     averageLOS () {
       let t = 0
       const p = this.patients.length
+      if (p === 0) {
+        return null
+      }
 
       for (const patient of this.patients) {
         t += differenceInSeconds(this.now, parseJSON(patient.entry))
