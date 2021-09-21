@@ -1,9 +1,9 @@
 <template>
   <b-card bg-variant="danger" title="Countdown">
-    <b-row v-for="item in list" :key="item._id" class="align-items-center">
+    <b-row v-for="item in list" :key="item._id" class="align-items-center mt-1">
       <b-col>
         <b-button size="sm" variant="light" block @click="openPatientInformation(item)">
-          {{ patient(item.patientId).hospitalNumber }}
+          {{ patientHospitalNumber(item.patientId) }}
         </b-button>
       </b-col>
       <b-col :class="['text-right', {'soon': duration(item) <= 60}]">
@@ -31,7 +31,7 @@ export default {
   computed: {
     ...mapGetters({
       list: 'countdown/list',
-      patient: 'patient/getById'
+      patients: 'patient/all'
     })
   },
 
@@ -41,6 +41,14 @@ export default {
   },
 
   methods: {
+    patientHospitalNumber (patientId) {
+      const p = this.patients.find(p => p._id === patientId)
+      if (p) {
+        return p.hospitalNumber
+      } else {
+        return 'Loading...'
+      }
+    },
     updateNow () {
       this.$set(this, 'now', new Date())
     },

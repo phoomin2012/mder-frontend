@@ -72,6 +72,13 @@ import { PatientTriageColor, PatientStageColorHex, PatientStageNumber } from '@/
 import { Swal } from '~/plugins/sweetalert2'
 import PeriodButton from '~/components/history/periodButton.vue'
 
+const displayFormats = {
+  second: 'HH:mm:ss',
+  minute: 'MM-dd HH:mm',
+  hour: 'MM-dd HH:mm',
+  day: 'yyyy-MM-dd'
+}
+
 export default {
   components: {
     PeriodButton
@@ -206,12 +213,7 @@ export default {
                 type: 'timeseries',
                 time: {
                   tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
-                  displayFormats: {
-                    second: 'HH:mm:ss',
-                    minute: 'dd HH:mm',
-                    hour: 'MM-dd HH:mm',
-                    day: 'MM-dd'
-                  }
+                  displayFormats
                 },
                 title: {
                   display: true,
@@ -309,12 +311,7 @@ export default {
                 type: 'timeseries',
                 time: {
                   tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
-                  displayFormats: {
-                    second: 'HH:mm:ss',
-                    minute: 'dd HH:mm',
-                    hour: 'MM-dd HH:mm',
-                    day: 'MM-dd'
-                  }
+                  displayFormats
                 },
                 title: {
                   display: true,
@@ -411,12 +408,7 @@ export default {
                 type: 'timeseries',
                 time: {
                   tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
-                  displayFormats: {
-                    second: 'HH:mm:ss',
-                    minute: 'dd HH:mm',
-                    hour: 'MM-dd HH:mm',
-                    day: 'MM-dd'
-                  }
+                  displayFormats
                 },
                 title: {
                   display: true,
@@ -509,12 +501,7 @@ export default {
                 type: 'timeseries',
                 time: {
                   tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
-                  displayFormats: {
-                    second: 'HH:mm:ss',
-                    minute: 'dd HH:mm',
-                    hour: 'MM-dd HH:mm',
-                    day: 'MM-dd'
-                  }
+                  displayFormats
                 },
                 title: {
                   display: true,
@@ -601,12 +588,7 @@ export default {
                 type: 'timeseries',
                 time: {
                   tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
-                  displayFormats: {
-                    second: 'HH:mm:ss',
-                    minute: 'dd HH:mm',
-                    hour: 'MM-dd HH:mm',
-                    day: 'MM-dd'
-                  }
+                  displayFormats
                 },
                 title: {
                   display: true,

@@ -6,7 +6,14 @@ export const state = () => ({
 
 export const getters = {
   all: state => state.list,
-  getById: state => id => state.list.find(p => p._id === id)
+  getById: state => (id, field = null) => {
+    const p = state.list.find(p => p._id === id)
+    if (p && field) {
+      return p[field]
+    }
+    console.log(p)
+    return p
+  }
 }
 
 export const mutations = {

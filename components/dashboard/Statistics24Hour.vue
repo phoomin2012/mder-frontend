@@ -268,7 +268,7 @@ export default {
           .attr('x', 0)
           .attr('y', '0.7em')
           .attr('fill-opacity', 0.7)
-          .text(d => d.data.value + '%'))
+          .text(d => d.data.value.toLocaleString() + '%'))
 
       el.appendChild(svg.node())
     },
