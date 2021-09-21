@@ -41,8 +41,11 @@
                     {{ $t('staff.nonRole') }}
                   </b-select-option>
                 </template>
-                <b-select-option v-for="(roleName, role) in $t('staff.roles')" :key="role" :value="role">
-                  {{ roleName }}
+                <b-select-option :value="'physician'">
+                  {{ $t('staff.roles.physician') }}
+                </b-select-option>
+                <b-select-option :value="'nurse'">
+                  {{ $t('staff.roles.nurse') }}
                 </b-select-option>
               </b-select>
             </b-form-group>
