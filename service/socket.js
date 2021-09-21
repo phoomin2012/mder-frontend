@@ -63,6 +63,11 @@ export default function ({ app, i18n, store }) {
     store.commit('summary/setNurse', nurse)
   })
 
+  socket.on('summary.todayPatient', function socketOnTodayPatient (data) {
+    const { patients } = data
+    store.commit('summary/setTodayPatient', patients)
+  })
+
   socket.on('checkIn', function socketOnCheckIn ({ role }) {
     console.log('[Socket] checkIn', role)
     store.dispatch('summary/checkIn', role)

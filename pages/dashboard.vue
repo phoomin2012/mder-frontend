@@ -29,7 +29,7 @@
             <h3 class="text-right mb-0">
               {{ $t('dashboard.patientToday') }}
             </h3>
-            <span class="font-weight-bold">-</span>
+            <span class="font-weight-bold">{{ todayPatient }}</span>
           </b-card-body>
         </b-card>
       </b-col>
@@ -180,7 +180,8 @@ export default {
     ...mapGetters({
       patients: 'patient/all',
       currentPhysician: 'summary/currentPhysician',
-      currentNurse: 'summary/currentNurse'
+      currentNurse: 'summary/currentNurse',
+      todayPatient: 'summary/todayPatient'
     }),
     patientFiltered () {
       const patientList = [...this.patients]
