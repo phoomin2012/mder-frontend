@@ -38,6 +38,7 @@ export default {
 
   data () {
     return {
+      timer: null,
       now: new Date(),
       loading: {
         population: false
@@ -90,6 +91,24 @@ export default {
       data[1].value = data[1].value / this.patients.length * 100
 
       return data
+    },
+    hours () {
+      return this.now.getHours()
+    }
+  },
+
+  watch: {
+    patients: {
+      deep: true,
+      handler () {
+        this.createLOSChart4hr()
+        this.createLOSChart6hr()
+      }
+    },
+    hours () {
+      this.fetchHistory().then(() => {
+        this.createBarChart()
+      })
     }
   },
 
@@ -99,9 +118,18 @@ export default {
     })
     this.createLOSChart4hr()
     this.createLOSChart6hr()
+
+    this.timer = setInterval(this.updateNow, 1000)
+  },
+
+  beforeDestroy () {
+    clearInterval(this.timer)
   },
 
   methods: {
+    updateNow () {
+      this.now = new Date()
+    },
     async fetchHistory () {
       const { data } = await this.$axios.get('/api/history/dashboard')
       this.$set(this.history, 'population', data.population)
@@ -154,12 +182,13 @@ export default {
                 grid: {
                   display: false
                 },
-                type: 'timeseries',
+                type: 'time',
                 time: {
-                  unit: 'second',
-                  tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
+                  tooltipFormat: 'yyyy-MM-dd HH:mm',
                   displayFormats: {
-                    second: 'HH:mm:ss'
+                    second: 'MM-dd HH:mm',
+                    minute: 'MM-dd HH:mm',
+                    hour: 'MM-dd HH:mm'
                   }
                 },
                 title: {
@@ -189,6 +218,10 @@ export default {
       }
     },
     createPieChart (el, data, colors = ['#d4665c', '#f0975b']) {
+      while (el.firstChild) {
+        el.removeChild(el.firstChild)
+      }
+
       const width = 300; const height = 300
 
       const radius = Math.min(width, height) / 2 * 0.5
