@@ -1,0 +1,44 @@
+[
+  {
+    "name": "dashboard",
+    "path": "/dashboard",
+    "component": "/Users/phumin/Desktop/mder-frontend/pages/dashboard.vue",
+    "chunkName": "pages/dashboard",
+    "_name": "_3d6bd9a0"
+  },
+  {
+    "name": "history",
+    "path": "/history",
+    "component": "/Users/phumin/Desktop/mder-frontend/pages/history.vue",
+    "chunkName": "pages/history",
+    "_name": "_091a3ec0"
+  },
+  {
+    "name": "staff",
+    "path": "/staff",
+    "component": "/Users/phumin/Desktop/mder-frontend/pages/staff/index.vue",
+    "chunkName": "pages/staff/index",
+    "_name": "_663f6b6f"
+  },
+  {
+    "name": "patient-new",
+    "path": "/patient/new",
+    "component": "/Users/phumin/Desktop/mder-frontend/pages/patient/new.vue",
+    "chunkName": "pages/patient/new",
+    "_name": "_6eaa8ebc"
+  },
+  {
+    "name": "staff-id",
+    "path": "/staff/:id",
+    "component": "/Users/phumin/Desktop/mder-frontend/pages/staff/_id.vue",
+    "chunkName": "pages/staff/_id",
+    "_name": "_483f7d97"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/phumin/Desktop/mder-frontend/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_a7d7ba44"
+  }
+]

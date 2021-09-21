@@ -1,0 +1,29 @@
+{
+  "CheckInOut": {
+    "description": "Auto imported from components/checkInOut.vue"
+  },
+  "ErrorHandle": {
+    "description": "Auto imported from components/error-handle.vue"
+  },
+  "Sidebar": {
+    "description": "Auto imported from components/sidebar.vue"
+  },
+  "DashboardStatistics24Hour": {
+    "description": "Auto imported from components/dashboard/Statistics24Hour.vue"
+  },
+  "DashboardCountDownBox": {
+    "description": "Auto imported from components/dashboard/countDownBox.vue"
+  },
+  "DashboardCountdownForm": {
+    "description": "Auto imported from components/dashboard/countdownForm.vue"
+  },
+  "DashboardOvercrowdMeter": {
+    "description": "Auto imported from components/dashboard/overcrowdMeter.vue"
+  },
+  "DashboardPatientInformation": {
+    "description": "Auto imported from components/dashboard/patientInformation.vue"
+  },
+  "HistoryPeriodButton": {
+    "description": "Auto imported from components/history/periodButton.vue"
+  }
+}
