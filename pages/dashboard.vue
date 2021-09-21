@@ -29,7 +29,7 @@
             <h3 class="text-right mb-0">
               {{ $t('dashboard.patientToday') }}
             </h3>
-            <span class="font-weight-bold">-</span>
+            <span class="font-weight-bold">{{ todayPatient }}</span>
           </b-card-body>
         </b-card>
       </b-col>
@@ -102,7 +102,7 @@
           <small class="font-weight-bold">Average length of stay</small>
           <div class="text-center flex-grow-1 d-flex justify-content-center align-items-center">
             <div class="font-weight-bold text-warning" style="font-size: 1.6rem;">
-              {{ isNaN(averageLOS) ? '-' : `${averageLOS} min` }}
+              {{ averageLOS ? `${averageLOS} min` : '-' }}
             </div>
           </div>
         </b-card-body>
@@ -180,7 +180,8 @@ export default {
     ...mapGetters({
       patients: 'patient/all',
       currentPhysician: 'summary/currentPhysician',
-      currentNurse: 'summary/currentNurse'
+      currentNurse: 'summary/currentNurse',
+      todayPatient: 'summary/todayPatient'
     }),
     patientFiltered () {
       const patientList = [...this.patients]
@@ -213,6 +214,9 @@ export default {
     averageLOS () {
       let t = 0
       const p = this.patients.length
+      if (p === 0) {
+        return null
+      }
 
       for (const patient of this.patients) {
         t += differenceInSeconds(this.now, parseJSON(patient.entry))

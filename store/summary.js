@@ -10,7 +10,8 @@ export const state = () => {
 export const getters = {
   currentPhysician: state => state.currentPhysician,
   currentNurse: state => state.currentNurse,
-  currentPatient: state => state.currentPatient
+  currentPatient: state => state.currentPatient,
+  todayPatient: state => state.todayPatient
 }
 
 export const mutations = {
@@ -43,6 +44,10 @@ export const mutations = {
   },
   setPatient (state, amount) {
     state.currentPatient = amount
+  },
+  // Feature 2: Today patient
+  setTodayPatient (state, amount) {
+    state.todayPatient = amount
   }
 }
 

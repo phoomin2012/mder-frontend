@@ -56,9 +56,9 @@
             "diagnosis": "Diagnosis",
             "treatment": "Treatment",
             "disposition": "Disposition",
-            "discharged": "Discharged",
-            "admitted": "Admitted",
-            "transferred": "Transferred"
+            "discharged": "Disposition - Discharged",
+            "admitted": "Disposition - Admitted",
+            "transferred": "Disposition - Transferred"
         },
         "stagesShort": {
             "triage": "Triage",

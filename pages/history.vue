@@ -205,10 +205,12 @@ export default {
                 },
                 type: 'timeseries',
                 time: {
-                  unit: 'second',
                   tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
                   displayFormats: {
-                    second: 'HH:mm:ss'
+                    second: 'HH:mm:ss',
+                    minute: 'dd HH:mm',
+                    hour: 'MM-dd HH:mm',
+                    day: 'MM-dd'
                   }
                 },
                 title: {
@@ -306,10 +308,12 @@ export default {
                 },
                 type: 'timeseries',
                 time: {
-                  unit: 'second',
                   tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
                   displayFormats: {
-                    second: 'HH:mm:ss'
+                    second: 'HH:mm:ss',
+                    minute: 'dd HH:mm',
+                    hour: 'MM-dd HH:mm',
+                    day: 'MM-dd'
                   }
                 },
                 title: {
@@ -406,10 +410,12 @@ export default {
                 },
                 type: 'timeseries',
                 time: {
-                  unit: 'second',
                   tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
                   displayFormats: {
-                    second: 'HH:mm:ss'
+                    second: 'HH:mm:ss',
+                    minute: 'dd HH:mm',
+                    hour: 'MM-dd HH:mm',
+                    day: 'MM-dd'
                   }
                 },
                 title: {
@@ -502,10 +508,12 @@ export default {
                 },
                 type: 'timeseries',
                 time: {
-                  unit: 'second',
                   tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
                   displayFormats: {
-                    second: 'HH:mm:ss'
+                    second: 'HH:mm:ss',
+                    minute: 'dd HH:mm',
+                    hour: 'MM-dd HH:mm',
+                    day: 'MM-dd'
                   }
                 },
                 title: {
@@ -592,10 +600,12 @@ export default {
                 },
                 type: 'timeseries',
                 time: {
-                  unit: 'second',
                   tooltipFormat: 'yyyy-MM-dd HH:mm:ss',
                   displayFormats: {
-                    second: 'HH:mm:ss'
+                    second: 'HH:mm:ss',
+                    minute: 'dd HH:mm',
+                    hour: 'MM-dd HH:mm',
+                    day: 'MM-dd'
                   }
                 },
                 title: {
