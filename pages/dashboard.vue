@@ -184,7 +184,7 @@ export default {
       todayPatient: 'summary/todayPatient'
     }),
     patientFiltered () {
-      const patientList = [...this.patients]
+      const patientList = [...this.patients].filter(p => [1, 2, 3, 4, 5, 60].includes(p.currentStage))
       return patientList.sort((first, second) => {
         if (first.triage < second.triage) {
           return -1
