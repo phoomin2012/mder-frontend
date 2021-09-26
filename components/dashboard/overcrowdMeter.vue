@@ -3,7 +3,7 @@
     <b-row>
       <b-col>
         <b-card title="EDWIN" class="mb-3">
-          {{ Math.max(0, edwinScore) }}
+          {{ Math.max(0, edwinScore).toLocaleString() }}
         </b-card>
       </b-col>
       <!-- <b-col>
@@ -31,8 +31,9 @@ function overcrowdNEDOCS (currentPatient, waitForAdmitPatient, ventilatorPatient
       5.64 * lastAdmitHr - 20
 }
 
-function overcrowdEDWIN (currentPatient, lv1Patient, lv2Patient, lv3Patient, lv4Patient, lv5Patient, currentStaff, EDBeds = 6) {
-  return ((lv5Patient * 1) + (lv4Patient * 2) + (lv3Patient * 3) + (lv2Patient * 4) + (lv1Patient * 5)) / ((currentStaff === 0 ? 1 : currentStaff) * (EDBeds - currentPatient))
+export function overcrowdEDWIN (currentPatient, lv1Patient, lv2Patient, lv3Patient, lv4Patient, lv5Patient, currentStaff, EDBeds = 6) {
+  const h = currentStaff * (Math.max(EDBeds, currentPatient + 1) - currentPatient)
+  return ((lv5Patient * 1) + (lv4Patient * 2) + (lv3Patient * 3) + (lv2Patient * 4) + (lv1Patient * 5)) / (h === 0 ? 0.01 : h)
 }
 
 export default {
@@ -94,14 +95,14 @@ export default {
   methods: {
     updatePointerNEDOCS (value) {
       const max = 200
-      const r = (360 / 2) * (Math.min(value, max) / max) - 90
+      const r = (360 / 2) * (Math.min(Math.max(0, value), max) / max) - 90
       if (this.pointerNEDOCS) {
         this.pointerNEDOCS.transition().duration(750).attr('transform', `rotate(${r})`)
       }
     },
     updatePointerEDWIN (value) {
       const max = 2.5
-      const r = (360 / 2) * (Math.min(value, max) / max) - 90
+      const r = (360 / 2) * (Math.min(Math.max(0, value), max) / max) - 90
       if (this.pointerEDWIN) {
         this.pointerEDWIN.transition().duration(750).attr('transform', `rotate(${r})`)
       }
