@@ -50,8 +50,8 @@
 
     <b-row class="mb-3">
       <b-col md="9">
-        <b-card no-body class="h-100">
-          <b-table :fields="fields" :items="patientFiltered" responsive sticky-header class="mb-0">
+        <b-card id="patients-container" no-body class="h-100">
+          <b-table :fields="fields" :items="patientFiltered" responsive sticky-header="436.78px" class="mb-0">
             <template #cell(hospitalNumber)="data">
               <b-button block variant="outline-success" @click.prevent="openPatientPopup(data.item)">
                 {{ data.item.hospitalNumber }}
