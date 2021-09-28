@@ -1,6 +1,19 @@
+
+
+// Then import Bootstrap an BootstrapVue SCSS files (order is important)
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
 html,
 body,
 div#__nuxt {
   min-height: 100% !important;
   height: 100%;
+}
+
+.b-table-sticky-header > .table.b-table > thead > tr > th {
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  z-index: unset;
+  top: -1px;
 }
