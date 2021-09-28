@@ -44,8 +44,12 @@
           <td>{{ dateFormatShort(patient.exit) }}</td>
         </tr>
         <tr>
-          <td>{{ $t('patient.timeInterval') }}</td>
+          <td>{{ $t('patient.timeIntervalCurrentStage') }}</td>
           <td>{{ currentStageTimeInterval(patient.stages[patient.stages.length - 1]) }}</td>
+        </tr>
+        <tr>
+          <td>{{ $t('patient.timeInterval') }}</td>
+          <td>{{ timeInterval(patient) }}</td>
         </tr>
         <tr>
           <td colspan="2" class="text-right">
@@ -334,6 +338,13 @@ export default {
     currentStageTimeInterval (stage) {
       const duration = intervalToDuration({
         start: parseJSON(stage.start),
+        end: this.now
+      })
+      return (duration.hours < 10 ? '0' : '') + duration.hours + ':' + (duration.minutes < 10 ? '0' : '') + duration.minutes + ':' + (duration.seconds < 10 ? '0' : '') + duration.seconds
+    },
+    timeInterval (patient) {
+      const duration = intervalToDuration({
+        start: parseJSON(patient.entry),
         end: this.now
       })
       return (duration.hours < 10 ? '0' : '') + duration.hours + ':' + (duration.minutes < 10 ? '0' : '') + duration.minutes + ':' + (duration.seconds < 10 ? '0' : '') + duration.seconds

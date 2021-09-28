@@ -47,6 +47,7 @@
         "exitTime": "Exit time",
         "entryAndExit": "Entry/Exit time",
         "timeInterval": "Time Interval",
+        "timeIntervalCurrentStage": "Time Interval current stage",
         "create": "Add patient into system",
         "stages": {
             "null": "--- Please select stage of patient ---",

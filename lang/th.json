@@ -47,6 +47,7 @@
         "exitTime": "เวลาออก",
         "entryAndExit": "เวลาเข้า/ออก",
         "timeInterval": "Time Interval",
+        "timeIntervalCurrentStage": "Time Interval ของ Stage ปัจจุบัน",
         "create": "เพิ่มผู้ป่วยเข้าสู่ระบบ",
         "stages": {
             "null": "--- โปรดเลือกสถานะผู้ป่วย ---",
