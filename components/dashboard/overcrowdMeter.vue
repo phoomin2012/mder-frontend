@@ -46,10 +46,12 @@ export default {
 
   computed: {
     ...mapGetters({
-      patients: 'patient/all',
       currentPhysician: 'summary/currentPhysician',
       currentNurse: 'summary/currentNurse'
     }),
+    patients () {
+      return this.$store.getters['patient/all'].filter(p => [1, 2, 3, 4, 5, 60].includes(p.currentStage))
+    },
     nedocsScore () {
       let LOSHr = 0; let lastAdmitHr = 0
 
