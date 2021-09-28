@@ -17,9 +17,9 @@
         <b-card class="h-100" no-body>
           <b-card-body class="d-flex flex-column justify-content-between">
             <h3 class="text-right mb-0">
-              {{ $tc('dashboard.currentPatient', patients.length) }}
+              {{ $tc('dashboard.currentPatient', patientFiltered.length) }}
             </h3>
-            <span class="font-weight-bold">{{ patients.length }}</span>
+            <span class="font-weight-bold">{{ patientFiltered.length }}</span>
           </b-card-body>
         </b-card>
       </b-col>
