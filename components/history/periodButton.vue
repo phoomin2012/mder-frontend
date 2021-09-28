@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import { format, differenceInCalendarDays, differenceInMinutes } from 'date-fns'
+import { format, differenceInCalendarDays, differenceInMinutes, subDays } from 'date-fns'
 
 export default {
   name: 'PeriodButton',
@@ -273,6 +273,7 @@ export default {
     loadPeriodFromStorage () {
       const save = window.localStorage.getItem('history-report-period')
       if (save) {
+        // Load from save
         const data = JSON.parse(save)
 
         if (data.mode === undefined) {
@@ -294,6 +295,26 @@ export default {
         this.$emit('update:past', this.pastPeriod)
         this.$emit('update:start', this.startDateTime)
         this.$emit('update:end', this.endDateTime)
+      } else {
+        // Initial
+        this.modePeriod = 'past'
+        this.showMode = 'past'
+        this.refreshRate = 10
+        this.pastPeriod = {
+          unit: 'hour',
+          amount: 1,
+          value: '-1h'
+        }
+
+        const now = new Date()
+        const hours = now.getHours()
+        const minutes = now.getMinutes() - (now.getMinutes() % 5)
+
+        const yesterday = subDays(now, 1)
+        this.startDate = format(yesterday, 'yyyy-MM-dd')
+        this.startTime = { hour: hours, minute: minutes }
+        this.endDate = format(now, 'yyyy-MM-dd')
+        this.endTime = { hour: hours, minute: minutes }
       }
     },
     savePeriodToStorage () {
