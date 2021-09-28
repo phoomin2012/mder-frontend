@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between align-items-center">
       <h1>
         <fa-icon icon="chart-area" />
-        {{ $t('history.title') }} ({{ formatDate(endPeriod) }})
+        {{ $t('history.title') }}
       </h1>
       <div>
         <period-button
