@@ -1,3 +1,5 @@
+process.env.BACKEND_URL = process.env.BACKEND_URL || 'localhost:3001'
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -8,7 +10,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'mder-frontend',
+    title: 'MDER | Monitoring Dashboard for Emergency Room',
     htmlAttrs: {
       lang: 'en'
     },
@@ -29,6 +31,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '@/plugins/axios.js',
     '@/plugins/fontawesome.js',
     '@/plugins/sweetalert2.js',
     '@/plugins/mask.js',
@@ -64,11 +67,16 @@ export default {
   },
 
   proxy: {
-    '/api': 'http://localhost:3001'
+    '/api': `http://${process.env.BACKEND_URL}`
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  bootstrapVue: {
+    bootstrapCSS: false, // Or `css: false`
+    bootstrapVueCSS: false // Or `bvCSS: false`
   },
 
   auth: {
